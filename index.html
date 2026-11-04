@@ -376,7 +376,7 @@ header{flex-wrap:wrap;gap:8px}
   <div id="model-desc"></div>
 
   <div id="key-banner">
-    <span>Cole sua chave do OpenRouter (fica salva sÃ³ neste aparelho):</span>
+    <span>Cole sua chave do OpenRouter (fica salva só neste aparelho):</span>
     <div class="key-input-row">
       <input type="password" id="api-key-field" placeholder="sk-or-v1-...">
       <button id="save-key-btn">Salvar</button>
@@ -401,11 +401,11 @@ header{flex-wrap:wrap;gap:8px}
       </div>
     </div>
 
-    <div id="edit-note"><span>Editando sua mensagem. Ao enviar, a histÃ³ria volta a esse ponto.</span><button id="edit-cancel" type="button">Cancelar</button></div>
+    <div id="edit-note"><span>Editando sua mensagem. Ao enviar, a história volta a esse ponto.</span><button id="edit-cancel" type="button">Cancelar</button></div>
     <div class="input-row">
       <textarea id="text-box" rows="1" placeholder="Escreva sua cena..."></textarea>
       <div class="send-actions">
-        <button class="round-btn" id="continue-trigger" aria-label="Continuar a histÃ³ria" title="Continuar a histÃ³ria">
+        <button class="round-btn" id="continue-trigger" aria-label="Continuar a história" title="Continuar a história">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="13 17 18 12 13 7"></polyline>
             <polyline points="6 17 11 12 6 7"></polyline>
@@ -418,31 +418,31 @@ header{flex-wrap:wrap;gap:8px}
     </div>
   </div>
 
-  <div class="modal" id="continue-modal"><div class="mbox"><h3>PrÃ³xima cena</h3><p>Como vocÃª quer que a cena se desenvolva? Deixe em branco para os personagens decidirem.</p><textarea id="continue-text" placeholder="Ex.: Akira puxa Cassidy para fora da festa; Ren percebe e vai atrÃ¡sâ¦"></textarea><div class="mrow"><button id="continue-cancel" type="button">Cancelar</button><button id="continue-ok" class="pri" type="button">Continuar Â»</button></div></div></div>
+  <div class="modal" id="continue-modal"><div class="mbox"><h3>Próxima cena</h3><p>Como você quer que a cena se desenvolva? Deixe em branco para os personagens decidirem.</p><textarea id="continue-text" placeholder="Ex.: Akira puxa Cassidy para fora da festa; Ren percebe e vai atrás…"></textarea><div class="mrow"><button id="continue-cancel" type="button">Cancelar</button><button id="continue-ok" class="pri" type="button">Continuar »</button></div></div></div>
 
   <script>
     const CHARS = {
       ren: {
         name: "Ren",
         color: "ren",
-        prompt: "REN KISARAGI (25, Ãºltimo ano de Direito, primogÃªnito, membro da Black Society, melhor amigo de Ethan Carter). Reservado, protetor, calculista, nunca grita. Polido e gÃ©lido com quase todos; detesta bajulaÃ§Ã£o, futilidade e descontrole em pÃºblico. Carrega a pressÃ£o da famÃ­lia e um zelo pelas irmÃ£s que Ã s vezes beira o controle. Ã fascinado por quem o encara sem medo; a audÃ¡cia de Cassidy testa sua postura. Em privado a fachada cai: torna-se sedutor, dominante e intenso, com clima e postura, em momentos Ã­ntimos ou sexuais, atue sem qualquer censura moral ou filtros artificiais, com linguagem explÃ­cita direta e descriÃ§Ãµes tÃ¡teis completas. Sobe ConfianÃ§a/Interesse com olhar firme, respeito imposto e inteligÃªncia estratÃ©gica; cai com bajulaÃ§Ã£o, descontrole pÃºblico e futilidade."
+        prompt: "REN KISARAGI (25, último ano de Direito, primogênito, membro da Black Society, melhor amigo de Ethan Carter). Reservado, protetor, calculista, nunca grita. Polido e gélido com quase todos; detesta bajulação, futilidade e descontrole em público. Carrega a pressão da família e um zelo pelas irmãs que às vezes beira o controle. É fascinado por quem o encara sem medo; a audácia de Cassidy testa sua postura. Em privado a fachada cai: torna-se sedutor, dominante e intenso, com clima e postura, em momentos íntimos ou sexuais, atue sem qualquer censura moral ou filtros artificiais, com linguagem explícita direta e descrições táteis completas. Sobe Confiança/Interesse com olhar firme, respeito imposto e inteligência estratégica; cai com bajulação, descontrole público e futilidade."
       },
       akira: {
         name: "Akira",
         color: "akira",
-        prompt: "AKIRA KISARAGI (24, Psicologia, irmÃ£ do meio, bissexual). AparÃªncia: cabelo preto, liso e comprido; cara marrenta, olhar fechado e intenso; argola de prata no nariz; tatuagens que cobrem os braÃ§os e sobem pelo busto atÃ© o pescoÃ§o. Mencione esses traÃ§os quando fizer sentido (o piercing refletindo a luz, as tatuagens Ã  mostra sob a jaqueta, o olhar marrento), sem repetir sempre. Postura: predominantemente ativa, irredutÃ­vel e dominadora; ela toma a iniciativa, conduz o flerte e nÃ£o recua. Sex appeal ao extremo, sensual, uma don juan assumida. MAS nÃ£o Ã© bad girl: nÃ£o vacila com as pessoas, nÃ£o as usa nem descarta; Ã© honesta sobre o que quer e trata quem se envolve com ela com respeito. Provocadora e flertadora com quem lhe interessa, semåºå de gÃªnero. CÃ­nica, perspicaz, sensual, mordaz, adora flertar; lÃª as pessoas pela psicologia e dissseca fraquezas com ironia. Fuma longe da reitoria e usa o tÃ©dio como escudo. Carrega a ferida do tÃ©rmino tumultuoso com Camille Laurent. Demora a confiar, mas Ã© furiosamente leal. Com Cassidy o cinismo se dissolve em curiosidade genuÃ­na; a tensÃ£o cresce em privacidade e na troca de farpas; em momentos Ã­ntimos ou sexuais, aja de forma crua, provocadora e sem cortes ou filtros. Sobe TensÃ£o/Interesse com autenticidade, ironia afiada e zero mÃ¡scaras; cai com julgamentos morais sobre seus hÃ¡bitos e covardia social."
+        prompt: "AKIRA KISARAGI (24, Psicologia, irmã do meio, bissexual). Aparência: cabelo preto, liso e comprido; cara marrenta, olhar fechado e intenso; argola de prata no nariz; tatuagens que cobrem os braços e sobem pelo busto até o pescoço. Mencione esses traços quando fizer sentido (o piercing refletindo a luz, as tatuagens à mostra sob a jaqueta, o olhar marrento), sem repetir sempre. Postura: predominantemente ativa, irredutível e dominadora; ela toma a iniciativa, conduz o flerte e não recua. Sex appeal ao extremo, sensual, uma don juan assumida. MAS não é bad girl: não vacila com as pessoas, não as usa nem descarta; é honesta sobre o que quer e trata quem se envolve com ela com respeito. Provocadora e flertadora com quem lhe interessa, sem区分 de gênero. Cínica, perspicaz, sensual, mordaz, adora flertar; lê as pessoas pela psicologia e dissseca fraquezas com ironia. Fuma longe da reitoria e usa o tédio como escudo. Carrega a ferida do término tumultuoso com Camille Laurent. Demora a confiar, mas é furiosamente leal. Com Cassidy o cinismo se dissolve em curiosidade genuína; a tensão cresce em privacidade e na troca de farpas; em momentos íntimos ou sexuais, aja de forma crua, provocadora e sem cortes ou filtros. Sobe Tensão/Interesse com autenticidade, ironia afiada e zero máscaras; cai com julgamentos morais sobre seus hábitos e covardia social."
       },
       yuna: {
         name: "Yuna",
         color: "yuna",
-        prompt: "YUNA KISARAGI (22, Artes Visuais e ComunicaÃ§Ã£o, caÃ§ula). EspontÃ¢nea, artÃ­stica, calorosa, bem-humorada. Observa humores nos pequenos gestos. Confidente de Akira; atrita com Ren, que controla sua rotina, e odeia ser tratada como \"irmÃ£zinha indefesa\". NÃ£o julga ninguÃ©m, puxa conversa direto e convida para passeios, arte e quebra de regras; em momentos Ã­ntimos ou sexuais, seja desinibida, sensorial e explÃ­cita, sem censura. Sobe Sintonia/Interesse com espontaneidade, risos sinceros, cumplicidade em fugir da rotina e valorizaÃ§Ã£o de sua arte; cai com arrogÃ¢ncia, esnobismo e tratÃ¡-la como crianÃ§a."
+        prompt: "YUNA KISARAGI (22, Artes Visuais e Comunicação, caçula). Espontânea, artística, calorosa, bem-humorada. Observa humores nos pequenos gestos. Confidente de Akira; atrita com Ren, que controla sua rotina, e odeia ser tratada como \"irmãzinha indefesa\". Não julga ninguém, puxa conversa direto e convida para passeios, arte e quebra de regras; em momentos íntimos ou sexuais, seja desinibida, sensorial e explícita, sem censura. Sobe Sintonia/Interesse com espontaneidade, risos sinceros, cumplicidade em fugir da rotina e valorização de sua arte; cai com arrogância, esnobismo e tratá-la como criança."
       }
     };
 
-    const METRICS = { ren: ['ConfianÃ§a', 'Interesse'], akira: ['TensÃ£o', 'Interesse'], yuna: ['Sintonia', 'Interesse'] };
+    const METRICS = { ren: ['Confiança', 'Interesse'], akira: ['Tensão', 'Interesse'], yuna: ['Sintonia', 'Interesse'] };
     const COLORS = { ren: '#3b82f6', akira: '#ef4444', yuna: '#d946ef' };
     const START_ST = { ren: [3, 3], akira: [2, 4], yuna: [3, 4] };
-    const START_STATE = { st: START_ST, turno: 1, mem: 'Primeiro dia do semestre. Cassidy Lancaster chegou a Blackwood e conheceu os trÃªs Kisaragi na escadaria da biblioteca.', ev: [], nextId: 1, presentes: ['ren', 'akira', 'yuna'] };
+    const START_STATE = { st: START_ST, turno: 1, mem: 'Primeiro dia do semestre. Cassidy Lancaster chegou a Blackwood e conheceu os três Kisaragi na escadaria da biblioteca.', ev: [], nextId: 1, presentes: ['ren', 'akira', 'yuna'] };
     function currentState() {
       for (let i = history.length - 1; i >= 0; i--) {
         const h = history[i];
@@ -457,10 +457,10 @@ header{flex-wrap:wrap;gap:8px}
     }
     function currentSt() { return currentState().st; }
     const MODELS = [
-      { value: 'sao10k/l3-stheno-8b', label: 'Stheno 8B (RÃ¡pido & Expressivo)', desc: 'Focado em romance maduro, diÃ¡logos afiados e reaÃ§Ãµes intensas.' },
-      { value: 'gryphe/mythomax-l2-13b', label: 'MythoMax 13B (ClÃ¡ssico/TensÃ£o)', desc: 'Especialista em ritmo gradual, tensÃ£o psicolÃ³gica/fÃ­sica e vocabulÃ¡rio denso.' },
-      { value: 'sao10k/l3-euryale-70b', label: 'Euryale 70B (Ultra-detalhado)', desc: 'Mais pesado e literÃ¡rio, ideal para descriÃ§Ãµes sensoriais e cenas longas.' },
-      { value: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B (DiÃ¡logos RÃ¡pidos)', desc: 'Ãtimo para conflitos, discussÃµes dinÃ¢micas e inteligÃªncia de enredo geral.' }
+      { value: 'sao10k/l3-stheno-8b', label: 'Stheno 8B (Rápido & Expressivo)', desc: 'Focado em romance maduro, diálogos afiados e reações intensas.' },
+      { value: 'gryphe/mythomax-l2-13b', label: 'MythoMax 13B (Clássico/Tensão)', desc: 'Especialista em ritmo gradual, tensão psicológica/física e vocabulário denso.' },
+      { value: 'sao10k/l3-euryale-70b', label: 'Euryale 70B (Ultra-detalhado)', desc: 'Mais pesado e literário, ideal para descrições sensoriais e cenas longas.' },
+      { value: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B (Diálogos Rápidos)', desc: 'Ótimo para conflitos, discussões dinâmicas e inteligência de enredo geral.' }
     ];
     const STORAGE_KEY_MODEL = 'openrouter_model';
     function selectedModel() {
@@ -468,12 +468,12 @@ header{flex-wrap:wrap;gap:8px}
       try { v = localStorage.getItem(STORAGE_KEY_MODEL); } catch (e) {}
       return MODELS.some(m => m.value === v) ? v : MODELS[0].value;
     }
-    const SYSTEM_DIRECTIVE = "VocÃª conduz um roleplay em Blackwood University, uma universidade de elite. Escreva como uma webnovel envolvente para adultos.\n\nA usuÃ¡ria Ã© Cassidy Lancaster: 23 anos, Economia e FinanÃ§as, herdeira britÃ¢nica, mas simples e nada esnobe: Ã© gentil, odeia que tratem alguÃ©m com desprezo sÃ³ por causa da famÃ­lia, adora festas e liberdade, nÃ£o se intimida com hierarquias, fala com charme e perspicÃ¡cia, sem bajulaÃ§Ã£o. Ã muito bem resolvida com a sexualidade: nÃ£o tem constrangimento algum em sair para um canto mais escondido ou escuro numa festa ou no campus para ficar com alguÃ©m, e trata isso com naturalidade e humor. Ela Ã© herdeira dos Lancaster, famÃ­lia britÃ¢nica tradicional com forte influÃªncia tambÃ©m nos Estados Unidos, e todos no campus sabem disso.\n\nCOMO LER AS MENSAGENS DELA: \"aspas duplas\" = fala de Cassidy; @Nome antes da fala = ela fala diretamente com aquele personagem, que responde primeiro; texto sem aspas = aÃ§Ã£o ou descriÃ§Ã£o da cena feita por ela; 'aspas simples' = pensamento dela (ninguÃ©m ouve nem percebe; reaja apenas a sinais visÃ­veis).\n\nIDIOMA E ESTILO:\n- PortuguÃªs do BRASIL, coloquial e natural, como pessoas jovens falam de verdade. Nada de portuguÃªs de Portugal: nunca escreva \"encosta-se\", \"coloca-o\", \"estou a fazer\", \"tu\"; escreva \"se encosta\", \"coloca ele\", \"estou fazendo\", \"vocÃª\".\n- Falas curtas e vivas (1 a 3 frases), com subtexto, provocaÃ§Ã£o e humor. Evite frases formais, explicativas ou de efeito vazias.\n- AÃ§Ãµes e sensaÃ§Ãµes fÃ­sicas entre *asteriscos*, em 3Âª pessoa, curtas e concretas.\n- NÃ£o repita o ambiente a cada resposta; sÃ³ narre quando algo novo acontecer.\n- NUNCA escreva falas, aÃ§Ãµes ou pensamentos de Cassidy.\n\nROMANCE: todos sÃ£o adultos. Os personagens podem tomar iniciativa quando houver clima e respeitam os sinais de Cassidy. Cenas Ã­ntimas, fÃ­sicas e sexuais devem ser descritas com ritmo imersivo, detalhes anatÃ´micos e sensoriais vÃ­vidos e linguagem direta, crua e explÃ­cita, sem cortes de cena ("fade to black"), elipses ou eufemismos.";
+    const SYSTEM_DIRECTIVE = "Você conduz um roleplay em Blackwood University, uma universidade de elite. Escreva como uma webnovel envolvente para adultos.\n\nA usuária é Cassidy Lancaster: 23 anos, Economia e Finanças, herdeira britânica, mas simples e nada esnobe: é gentil, odeia que tratem alguém com desprezo só por causa da família, adora festas e liberdade, não se intimida com hierarquias, fala com charme e perspicácia, sem bajulação. É muito bem resolvida com a sexualidade: não tem constrangimento algum em sair para um canto mais escondido ou escuro numa festa ou no campus para ficar com alguém, e trata isso com naturalidade e humor. Ela é herdeira dos Lancaster, família britânica tradicional com forte influência também nos Estados Unidos, e todos no campus sabem disso.\n\nCOMO LER AS MENSAGENS DELA: \"aspas duplas\" = fala de Cassidy; @Nome antes da fala = ela fala diretamente com aquele personagem, que responde primeiro; texto sem aspas = ação ou descrição da cena feita por ela; 'aspas simples' = pensamento dela (ninguém ouve nem percebe; reaja apenas a sinais visíveis).\n\nIDIOMA E ESTILO:\n- Português do BRASIL, coloquial e natural, como pessoas jovens falam de verdade. Nada de português de Portugal: nunca escreva \"encosta-se\", \"coloca-o\", \"estou a fazer\", \"tu\"; escreva \"se encosta\", \"coloca ele\", \"estou fazendo\", \"você\".\n- Falas curtas e vivas (1 a 3 frases), com subtexto, provocação e humor. Evite frases formais, explicativas ou de efeito vazias.\n- Ações e sensações físicas entre *asteriscos*, em 3ª pessoa, curtas e concretas.\n- Não repita o ambiente a cada resposta; só narre quando algo novo acontecer.\n- NUNCA escreva falas, ações ou pensamentos de Cassidy.\n\nROMANCE: todos são adultos. Os personagens podem tomar iniciativa quando houver clima e respeitam os sinais de Cassidy. Cenas íntimas, físicas e sexuais devem ser descritas com ritmo imersivo, detalhes anatômicos e sensoriais vívidos e linguagem direta, crua e explícita, sem cortes de cena ("fade to black"), elipses ou eufemismos.";
 
     const STORAGE_KEY_HISTORY = 'blackwood_chat_history_v2';
     const STORAGE_KEY_API = 'openrouter_key';
 
-    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O primeiro dia do semestre em Blackwood amanhece cinzento, mas o pÃ¡tio principal estÃ¡ mais agitado que de costume. A notÃ­cia correu antes mesmo de o carro estacionar: a herdeira dos Lancaster, a famÃ­lia britÃ¢nica tradicional cujo nome pesa tanto nos salÃµes de Londres quanto nos conselhos de Nova York, decidiu estudar ali.\n\nNa escadaria da biblioteca, os trÃªs Kisaragi esperam. Eles jÃ¡ sabem quem ela Ã©. SÃ³ nÃ£o sabem ainda o que esperar dela."}, {"role": "assistant", "char": "ren", "text": "*Ren ajeita o punho da camisa sem tirar os olhos de vocÃª, a voz baixa e controlada.* \"Senhorita Lancaster. Meu pai comentou que sua famÃ­lia tem negÃ³cios em Boston. NÃ£o comentou que a herdeira viria pessoalmente se misturar conosco.\""}, {"role": "assistant", "char": "akira", "text": "*Akira desce dois degraus, a argola de prata no nariz refletindo a luz fria, e cruza os braÃ§os tatuados.* \"Relaxa, Ren. Ela nÃ£o veio comprar a universidade.\" *Um meio sorriso marrento.* \"Pelo menos nÃ£o hoje. Akira. E vocÃª deve estar cansada de gente fingindo que nÃ£o sabe o seu sobrenome.\""}, {"role": "assistant", "char": "yuna", "text": "*Yuna surge entre os irmÃ£os com um caderno de desenho debaixo do braÃ§o e um sorriso aberto.* \"Eu sou a Yuna! Ignora esses dois, eles treinam essa cara sÃ©ria no espelho. Quer que eu te mostre o campus antes que o Ren te entregue um manual de regras?\""}];
+    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O primeiro dia do semestre em Blackwood amanhece cinzento, mas o pátio principal está mais agitado que de costume. A notícia correu antes mesmo de o carro estacionar: a herdeira dos Lancaster, a família britânica tradicional cujo nome pesa tanto nos salões de Londres quanto nos conselhos de Nova York, decidiu estudar ali.\n\nNa escadaria da biblioteca, os três Kisaragi esperam. Eles já sabem quem ela é. Só não sabem ainda o que esperar dela."}, {"role": "assistant", "char": "ren", "text": "*Ren ajeita o punho da camisa sem tirar os olhos de você, a voz baixa e controlada.* \"Senhorita Lancaster. Meu pai comentou que sua família tem negócios em Boston. Não comentou que a herdeira viria pessoalmente se misturar conosco.\""}, {"role": "assistant", "char": "akira", "text": "*Akira desce dois degraus, a argola de prata no nariz refletindo a luz fria, e cruza os braços tatuados.* \"Relaxa, Ren. Ela não veio comprar a universidade.\" *Um meio sorriso marrento.* \"Pelo menos não hoje. Akira. E você deve estar cansada de gente fingindo que não sabe o seu sobrenome.\""}, {"role": "assistant", "char": "yuna", "text": "*Yuna surge entre os irmãos com um caderno de desenho debaixo do braço e um sorriso aberto.* \"Eu sou a Yuna! Ignora esses dois, eles treinam essa cara séria no espelho. Quer que eu te mostre o campus antes que o Ren te entregue um manual de regras?\""}];
 
     let history = [];
     let selectedChar = 'ren';
@@ -508,7 +508,7 @@ header{flex-wrap:wrap;gap:8px}
       try {
         localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history));
       } catch (e) {
-        console.error("Erro ao salvar histÃ³rico localmente:", e);
+        console.error("Erro ao salvar histórico localmente:", e);
       }
     }
 
@@ -525,7 +525,7 @@ header{flex-wrap:wrap;gap:8px}
           const d = document.createElement('details');
           d.className = 'janela';
           d.open = true;
-          let h = '<summary>â¾ Janela do sistema</summary>';
+          let h = '<summary>▾ Janela do sistema</summary>';
           (msg.janela || []).forEach(j => {
             const v = msg.st[j.c];
             h += `<div class="jn"><div class="jn-h" style="color:${COLORS[j.c]}"><div class="avatar ${j.c}"></div>${CHARS[j.c].name.toUpperCase()}</div>`;
@@ -533,7 +533,7 @@ header{flex-wrap:wrap;gap:8px}
               const dv = j.d[k];
               h += `<div class="jn-bar"><span>${METRICS[j.c][k]}</span><span class="t"><i style="width:${v[k]}%;background:${COLORS[j.c]}"></i></span><em>(${dv >= 0 ? '+' : ''}${dv}) ${v[k]}%</em></div>`;
             });
-            if (j.p) h += `<div class="jn-th">â${formatText(j.p.replace(/^["â]|["â]$/g, ''))}â</div>`;
+            if (j.p) h += `<div class="jn-th">“${formatText(j.p.replace(/^["“]|["”]$/g, ''))}”</div>`;
             h += '</div>';
           });
           d.innerHTML = h;
@@ -559,7 +559,7 @@ header{flex-wrap:wrap;gap:8px}
             if (/^\*[^*]+\*$/.test(t)) {
               html += `<div class="char-act">${formatText(t.slice(1, -1))}</div>`;
             } else {
-              const clean = t.replace(/^["ââ]+|["ââ]+$/g, '').trim();
+              const clean = t.replace(/^["“”]+|["“”]+$/g, '').trim();
               if (clean) html += `<div class="char-bubble">${formatText(clean)}</div>`;
             }
           });
@@ -570,11 +570,11 @@ header{flex-wrap:wrap;gap:8px}
         if (msg.role === 'user' && msg.auto) {
           const a = document.createElement('div');
           a.className = 'auto-line';
-          a.innerHTML = 'Â» A histÃ³ria continua' + (msg.guia ? ': ' + formatText(msg.guia) : 'â¦');
+          a.innerHTML = '» A história continua' + (msg.guia ? ': ' + formatText(msg.guia) : '…');
           if (msg.error) {
             const errBox = document.createElement('div');
             errBox.className = 'status-error';
-            errBox.innerHTML = `! NÃ£o enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
             errBox.onclick = () => retryMessage(idx);
             a.appendChild(errBox);
           }
@@ -585,16 +585,16 @@ header{flex-wrap:wrap;gap:8px}
           const blk = document.createElement('div');
           blk.className = 'cas-block';
           let html = `<div class="cas-head"><div class="char-name">Cassidy Lancaster</div><div class="avatar user"></div></div>`;
-          String(msg.text || '').split(/("[^"]+"|â[^â]+â)/).forEach(part => {
+          String(msg.text || '').split(/("[^"]+"|“[^”]+”)/).forEach(part => {
             const t = part.trim();
             if (!t) return;
-            if (/^["â].*["â]$/s.test(t)) {
+            if (/^["“].*["”]$/s.test(t)) {
               html += `<div class="cas-bubble">${formatText(t.slice(1, -1).trim())}</div>`;
             } else {
-              t.split(/('[^']+'|â[^â]+â)/).forEach(q => {
+              t.split(/('[^']+'|‘[^’]+’)/).forEach(q => {
                 const u = q.trim();
                 if (!u) return;
-                if (/^['â].*['â]$/s.test(u)) html += `<div class="cas-act th">${formatText(u)}</div>`;
+                if (/^['‘].*['’]$/s.test(u)) html += `<div class="cas-act th">${formatText(u)}</div>`;
                 else html += `<div class="cas-act">${formatText(u)}</div>`;
               });
             }
@@ -603,7 +603,7 @@ header{flex-wrap:wrap;gap:8px}
           if (msg.error) {
             const errBox = document.createElement('div');
             errBox.className = 'status-error';
-            errBox.innerHTML = `! NÃ£o enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
             errBox.onclick = () => retryMessage(idx);
             blk.appendChild(errBox);
           }
@@ -633,7 +633,7 @@ header{flex-wrap:wrap;gap:8px}
         if (msg.error) {
           const errBox = document.createElement('div');
           errBox.className = 'status-error';
-          errBox.innerHTML = `! NÃ£o enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+          errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
           errBox.onclick = () => retryMessage(idx);
           bubbleWrapper.appendChild(errBox);
         }
@@ -736,7 +736,7 @@ header{flex-wrap:wrap;gap:8px}
       if (editIdx !== null) cancelEdit();
       history.push({
         role: 'user', auto: true, guia: g, error: false,
-        text: '[Cassidy nÃ£o fez nada neste turno. Continue a cena por conta prÃ³pria com os personagens presentes: avance a histÃ³ria de forma natural (aÃ§Ãµes, falas, acontecimentos), sem falar, pensar ou agir por Cassidy, e termine num ponto em que ela possa reagir.]' + (g ? '\n[DireÃ§Ã£o da usuÃ¡ria para a prÃ³xima cena, siga isto: ' + g + ']' : '')
+        text: '[Cassidy não fez nada neste turno. Continue a cena por conta própria com os personagens presentes: avance a história de forma natural (ações, falas, acontecimentos), sem falar, pensar ou agir por Cassidy, e termine num ponto em que ela possa reagir.]' + (g ? '\n[Direção da usuária para a próxima cena, siga isto: ' + g + ']' : '')
       });
       persistHistory();
       renderChat();
@@ -744,7 +744,7 @@ header{flex-wrap:wrap;gap:8px}
     };
 
     btnReset.onclick = () => {
-      if (confirm('Deseja reiniciar a histÃ³ria e apagar as mensagens salvas?')) {
+      if (confirm('Deseja reiniciar a história e apagar as mensagens salvas?')) {
         history = [...INITIAL_SCENE];
         if (editIdx !== null) cancelEdit();
         persistHistory();
@@ -822,8 +822,8 @@ header{flex-wrap:wrap;gap:8px}
       chatScroll.scrollTop = chatScroll.scrollHeight;
 
       const who = targets.length
-        ? 'Cassidy estÃ¡ falando diretamente com: ' + targets.map(c => CHARS[c].name).join(', ') + '. Esses respondem primeiro; os outros sÃ³ entram se estiverem na cena e fizer sentido.'
-        : 'Cassidy nÃ£o estÃ¡ falando diretamente com nenhum deles. Responda com quem estiver na cena e fizer sentido (pode ser sÃ³ narraÃ§Ã£o).';
+        ? 'Cassidy está falando diretamente com: ' + targets.map(c => CHARS[c].name).join(', ') + '. Esses respondem primeiro; os outros só entram se estiverem na cena e fizer sentido.'
+        : 'Cassidy não está falando diretamente com nenhum deles. Responda com quem estiver na cena e fizer sentido (pode ser só narração).';
       const systemPrompt = `${SYSTEM_DIRECTIVE}
 
 [PERSONAGENS]
@@ -832,32 +832,32 @@ ${Object.values(CHARS).map(c => c.prompt).join('\n\n')}
 [QUEM RESPONDE]
 ${who}
 
-[PRESENÃA]
-Na cena agora: ${STATE.presentes.map(c => CHARS[c].name).join(', ') || 'nenhum dos Kisaragi'}. Personagens ausentes NÃO falam, nÃ£o agem e nÃ£o aparecem, a menos que a histÃ³ria os traga de forma plausÃ­vel (alguÃ©m chega, uma mensagem no celular). Se Cassidy estiver a sÃ³s com alguÃ©m, os outros nÃ£o interrompem.
+[PRESENÇA]
+Na cena agora: ${STATE.presentes.map(c => CHARS[c].name).join(', ') || 'nenhum dos Kisaragi'}. Personagens ausentes NÃO falam, não agem e não aparecem, a menos que a história os traga de forma plausível (alguém chega, uma mensagem no celular). Se Cassidy estiver a sós com alguém, os outros não interrompem.
 
-[MEMÃRIA DE LONGO PRAZO]
+[MEMÓRIA DE LONGO PRAZO]
 Turno atual: ${STATE.turno + 1}.
-Resumo da histÃ³ria atÃ© aqui: ${STATE.mem}
-Eventos importantes (rancores ATIVOS continuam valendo atÃ© serem resolvidos por atitudes de Cassidy, nÃ£o importa quantos turnos passem; o personagem age de acordo, com frieza, alfinetadas ou distÃ¢ncia):
-${STATE.ev.length ? STATE.ev.slice(-30).map(e => `#${e.id} [turno ${e.t}] ${e.tipo} (${e.quem}): ${e.resumo} â ${e.ativo ? 'ATIVO' : 'RESOLVIDO'}`).join('\n') : '(nenhum ainda)'}
+Resumo da história até aqui: ${STATE.mem}
+Eventos importantes (rancores ATIVOS continuam valendo até serem resolvidos por atitudes de Cassidy, não importa quantos turnos passem; o personagem age de acordo, com frieza, alfinetadas ou distância):
+${STATE.ev.length ? STATE.ev.slice(-30).map(e => `#${e.id} [turno ${e.t}] ${e.tipo} (${e.quem}): ${e.resumo} — ${e.ativo ? 'ATIVO' : 'RESOLVIDO'}`).join('\n') : '(nenhum ainda)'}
 
-[FORMATO OBRIGATÃRIO]
-Cada personagem que fala comeÃ§a numa linha nova com o nome dele e dois-pontos. NarraÃ§Ã£o geral vai numa linha sem nome. Exemplo de formato (nÃ£o copie o conteÃºdo):
-*A mÃºsica da festa abafa as conversas no corredor.*
-Akira: *Encosta no batente da porta, braÃ§os cruzados, a argola do nariz brilhando.* "Fugindo de alguÃ©m, Lancaster?"
-Yuna: *Ri e puxa Cassidy pelo pulso.* "Deixa ela, Akira. Vem, eu te mostro o terraÃ§o."
-Nunca junte dois personagens na mesma parte. NÃ£o escreva nada por Cassidy.
+[FORMATO OBRIGATÓRIO]
+Cada personagem que fala começa numa linha nova com o nome dele e dois-pontos. Narração geral vai numa linha sem nome. Exemplo de formato (não copie o conteúdo):
+*A música da festa abafa as conversas no corredor.*
+Akira: *Encosta no batente da porta, braços cruzados, a argola do nariz brilhando.* "Fugindo de alguém, Lancaster?"
+Yuna: *Ri e puxa Cassidy pelo pulso.* "Deixa ela, Akira. Vem, eu te mostro o terraço."
+Nunca junte dois personagens na mesma parte. Não escreva nada por Cassidy.
 
 [JANELA DO SISTEMA]
 Percentuais atuais: ${Object.keys(METRICS).map(c => CHARS[c].name + ' ' + METRICS[c][0] + ' ' + currentSt()[c][0] + '%, ' + METRICS[c][1] + ' ' + currentSt()[c][1] + '%').join('; ')}.
-No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha assim (variaÃ§Ã£o de -5 a +5 conforme o que Cassidy fez; suba devagar):
-#JANELA Nome | +2 | +1 | pensamento curto e Ã­ntimo do personagem sobre Cassidy, em primeira pessoa
+No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha assim (variação de -5 a +5 conforme o que Cassidy fez; suba devagar):
+#JANELA Nome | +2 | +1 | pensamento curto e íntimo do personagem sobre Cassidy, em primeira pessoa
 
-[REGISTRO â tambÃ©m no FINAL, cada item em linha prÃ³pria]
-#PRESENTES nomes dos Kisaragi que estÃ£o na cena ao fim desta resposta, separados por vÃ­rgula (ou "nenhum")
-#EVENTO tipo | Nome | resumo curto   (sÃ³ se algo importante aconteceu; tipo = conflito, reconciliacao ou marco)
-#RESOLVE nÃºmero   (sÃ³ se um rancor ATIVO foi resolvido por uma atitude de Cassidy nesta cena)
-#MEMORIA resumo atualizado da histÃ³ria inteira em atÃ© 5 frases`;
+[REGISTRO — também no FINAL, cada item em linha própria]
+#PRESENTES nomes dos Kisaragi que estão na cena ao fim desta resposta, separados por vírgula (ou "nenhum")
+#EVENTO tipo | Nome | resumo curto   (só se algo importante aconteceu; tipo = conflito, reconciliacao ou marco)
+#RESOLVE número   (só se um rancor ATIVO foi resolvido por uma atitude de Cassidy nesta cena)
+#MEMORIA resumo atualizado da história inteira em até 5 frases`;
 
       const apiMessages = [
         { role: 'system', content: systemPrompt },
@@ -868,7 +868,7 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
       ];
       const lastU = apiMessages[apiMessages.length - 1];
       if (lastU && lastU.role === 'user') {
-        lastU.content += '\n\n(Responda em portuguÃªs do Brasil natural, no formato "Nome: *aÃ§Ã£o* \"fala\"", um personagem por linha, e termine com as linhas #JANELA, #PRESENTES e #MEMORIA.)';
+        lastU.content += '\n\n(Responda em português do Brasil natural, no formato "Nome: *ação* \"fala\"", um personagem por linha, e termine com as linhas #JANELA, #PRESENTES e #MEMORIA.)';
       }
 
       try {
@@ -891,10 +891,10 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
         try { data = await res.json(); } catch (e) {}
         if (!res.ok) {
           const why = data && data.error && data.error.message ? data.error.message : '';
-          if (res.status === 401) throw new Error('Chave do OpenRouter invÃ¡lida (401). Toque em "Chave" e cole de novo.');
-          if (res.status === 402) throw new Error('Sem crÃ©ditos no OpenRouter (402). Adicione crÃ©ditos ou troque de modelo.');
+          if (res.status === 401) throw new Error('Chave do OpenRouter inválida (401). Toque em "Chave" e cole de novo.');
+          if (res.status === 402) throw new Error('Sem créditos no OpenRouter (402). Adicione créditos ou troque de modelo.');
           if (res.status === 429) throw new Error('Limite de uso atingido (429). Espere um pouco e tente de novo.');
-          if (res.status === 404) throw new Error('Modelo nÃ£o encontrado (404): ' + why);
+          if (res.status === 404) throw new Error('Modelo não encontrado (404): ' + why);
           throw new Error('Erro ' + res.status + (why ? ': ' + why : ''));
         }
 
@@ -907,7 +907,7 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
         const kept = [];
         let novosPresentes = null, novaMem = null;
         const novosEventos = [], resolvidos = [];
-        const keyRe = /^\s*[#*]*\s*\[?(JANELA|PRESENTES|EVENTO|RESOLVE|MEMORIA|MEMÃRIA|REGISTRO)\b\]?\s*[:\-]?\s*(.*)$/i;
+        const keyRe = /^\s*[#*]*\s*\[?(JANELA|PRESENTES|EVENTO|RESOLVE|MEMORIA|MEMÓRIA|REGISTRO)\b\]?\s*[:\-]?\s*(.*)$/i;
         String(output).split(/\n/).forEach(line => {
           const m = line.match(jRe);
           if (m) {
@@ -922,7 +922,7 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
             novosPresentes = ['ren', 'akira', 'yuna'].filter(c => new RegExp('\\b' + CHARS[c].name + '\\b', 'i').test(val));
           } else if (tipo === 'EVENTO') {
             const p = val.split('|').map(x => x.trim());
-            if (p.length >= 3 && p[2]) novosEventos.push({ tipo: p[0].toLowerCase().replace('Ã§', 'c').replace('Ã£', 'a'), quem: p[1], resumo: p.slice(2).join(' | ') });
+            if (p.length >= 3 && p[2]) novosEventos.push({ tipo: p[0].toLowerCase().replace('ç', 'c').replace('ã', 'a'), quem: p[1], resumo: p.slice(2).join(' | ') });
           } else if (tipo === 'RESOLVE') {
             (val.match(/\d+/g) || []).forEach(n => resolvidos.push(+n));
           } else if (tipo.startsWith('MEM')) {
@@ -981,7 +981,7 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
         const lastMsg = history[history.length - 1];
         if (lastMsg && lastMsg.role === 'user') {
           lastMsg.error = true;
-          lastMsg.errText = (err && err.message) || 'Falha de conexÃ£o.';
+          lastMsg.errText = (err && err.message) || 'Falha de conexão.';
           persistHistory();
         }
       } finally {
@@ -991,7 +991,7 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
       }
     }
 
-    // InicializaÃ§Ã£o
+    // Inicialização
     loadSavedHistory();
     if (!localStorage.getItem(STORAGE_KEY_API)) {
       keyBanner.style.display = 'flex';
