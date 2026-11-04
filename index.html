@@ -329,6 +329,12 @@
 .char-bubble{background:#262833;border:none;border-radius:16px;padding:14px 16px;font-size:.98rem;line-height:1.6;color:#eef0f5;max-width:87%;word-break:break-word}
 .char-act{color:#a7abb8;font-size:.98rem;line-height:1.6}
 .message-row.user .bubble{border:none;background:#262833}
+.cas-block{align-self:stretch;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.cas-head{display:flex;align-items:center;gap:12px}
+.cas-head .avatar{width:40px;height:40px}
+.cas-bubble{background:#24124f;color:#fff;border-radius:16px;padding:14px 16px;font-size:.98rem;line-height:1.6;max-width:87%;word-break:break-word}
+.cas-act{color:#a7abb8;font-size:.98rem;line-height:1.6;max-width:87%;align-self:flex-end;width:87%}
+.cas-act.th{font-style:italic}
   </style>
 </head>
 <body>
@@ -418,7 +424,7 @@ Escreva como uma webnovel imersiva para adultos.
     const STORAGE_KEY_HISTORY = 'blackwood_chat_history_v2';
     const STORAGE_KEY_API = 'openrouter_key';
 
-    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O semestre começa em Blackwood com sol fraco e fofoca forte. Cassidy Lancaster desce do carro com malas de grife e um sorriso que faz o pátio inteiro desviar o olhar.\n\nNa escadaria da biblioteca, a família Kisaragi aparece no topo dos degraus. Só uma pessoa não se mexe: ela."}, {"role": "assistant", "char": "yuna", "text": "*Desce dois degraus de um pulo, sem cerimônia, e para com as mãos nos bolsos da jaqueta.* \"Você deve ser a Lancaster! Não liga pro pessoal, aqui todo mundo finge que se conhece há anos. Eu já gostei de você, e nem sei direito seu nome completo, mas vou descobrir.\""}, {"role": "assistant", "char": "ren", "text": "*Ajusta o relógio no pulso sem desviar os olhos de Cassidy.* \"Yuna, não bloqueie a passagem. Bem-vinda a Blackwood, Cassidy. Espero que você aprenda as regras daqui antes de quebrá-las, porque as pessoas costumam cobrar caro por isso.\""}, {"role": "assistant", "char": "akira", "text": "*Guarda o cigarro apagado no bolso da jaqueta com um sorriso de canto.* \"Ela já quebrou uma regra, Ren. Chegou depois do horário, passou por todo mundo sem pedir licença e ainda assim parece que o campus está esperando por ela.\""}];
+    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O primeiro dia do semestre em Blackwood amanhece cinzento, mas o pátio principal está mais agitado que de costume. A notícia correu antes mesmo de o carro estacionar: a herdeira dos Lancaster, a família britânica tradicional cujo nome pesa tanto nos salões de Londres quanto nos conselhos de Nova York, decidiu estudar ali.\n\nNa escadaria da biblioteca, os três Kisaragi esperam. Eles já sabem quem ela é. Só não sabem ainda o que esperar dela."}, {"role": "assistant", "char": "ren", "text": "*Ren ajeita o punho da camisa sem tirar os olhos de você, a voz baixa e controlada.* \"Senhorita Lancaster. Meu pai comentou que sua família tem negócios em Boston. Não comentou que a herdeira viria pessoalmente se misturar conosco.\""}, {"role": "assistant", "char": "akira", "text": "*Akira desce dois degraus, a argola de prata no nariz refletindo a luz fria, e cruza os braços tatuados.* \"Relaxa, Ren. Ela não veio comprar a universidade.\" *Um meio sorriso marrento.* \"Pelo menos não hoje. Akira. E você deve estar cansada de gente fingindo que não sabe o seu sobrenome.\""}, {"role": "assistant", "char": "yuna", "text": "*Yuna surge entre os irmãos com um caderno de desenho debaixo do braço e um sorriso aberto.* \"Eu sou a Yuna! Ignora esses dois, eles treinam essa cara séria no espelho. Quer que eu te mostre o campus antes que o Ren te entregue um manual de regras?\""}];
 
     let history = [];
     let selectedChar = 'ren';
@@ -488,6 +494,35 @@ Escreva como uma webnovel imersiva para adultos.
             }
           });
           blk.innerHTML = html;
+          chatScroll.appendChild(blk);
+          return;
+        }
+        if (msg.role === 'user') {
+          const blk = document.createElement('div');
+          blk.className = 'cas-block';
+          let html = `<div class="cas-head"><div class="char-name">Cassidy Lancaster</div><div class="avatar user"></div></div>`;
+          String(msg.text || '').split(/("[^"]+"|“[^”]+”)/).forEach(part => {
+            const t = part.trim();
+            if (!t) return;
+            if (/^["“].*["”]$/s.test(t)) {
+              html += `<div class="cas-bubble">${formatText(t.slice(1, -1).trim())}</div>`;
+            } else {
+              t.split(/('[^']+'|‘[^’]+’)/).forEach(q => {
+                const u = q.trim();
+                if (!u) return;
+                if (/^['‘].*['’]$/s.test(u)) html += `<div class="cas-act th">${formatText(u)}</div>`;
+                else html += `<div class="cas-act">${formatText(u)}</div>`;
+              });
+            }
+          });
+          blk.innerHTML = html;
+          if (msg.error) {
+            const errBox = document.createElement('div');
+            errBox.className = 'status-error';
+            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+            errBox.onclick = () => retryMessage(idx);
+            blk.appendChild(errBox);
+          }
           chatScroll.appendChild(blk);
           return;
         }
@@ -636,7 +671,7 @@ Escreva como uma webnovel imersiva para adultos.
             'X-Title': 'Blackwood University'
           },
           body: JSON.stringify({
-            model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
+            model: 'mistralai/mistral-small-24b-instruct-2501:free',
             messages: apiMessages
           })
         });
