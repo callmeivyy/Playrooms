@@ -662,7 +662,7 @@ Escreva como uma webnovel imersiva para adultos.
       ];
 
       try {
-        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        const callModel = (modelId) => fetch('https://openrouter.ai/api/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${apiKey}`,
@@ -671,10 +671,14 @@ Escreva como uma webnovel imersiva para adultos.
             'X-Title': 'Blackwood University'
           },
           body: JSON.stringify({
-            model: 'mistralai/mistral-small-24b-instruct-2501:free',
+            model: modelId,
             messages: apiMessages
           })
         });
+        let res = await callModel('meta-llama/llama-3.3-70b-instruct:free');
+        if (res.status === 404 || res.status === 400) {
+          res = await callModel('openrouter/free');
+        }
 
         let data = null;
         try { data = await res.json(); } catch (e) {}
