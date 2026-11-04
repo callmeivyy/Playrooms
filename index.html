@@ -1,69 +1,576 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Blackwood · Kisaragi (OpenRouter)</title>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#10121a;--sf:#1a1d29;--sf2:#232738;--tx:#e9e6f0;--mu:#8d90a6;--me:#2b2f45;color-scheme:dark}
-*{box-sizing:border-box}html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--tx);font:16px/1.55 Figtree,system-ui,sans-serif;display:flex;flex-direction:column}
-header{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--sf2)}
-header h1{font:600 19px Spectral,Georgia,serif;margin:0;flex:1}
-header button{background:none;border:1px solid var(--sf2);color:var(--mu);border-radius:8px;padding:6px 10px;font:inherit;font-size:13px}
-#feed{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:16px}
-.nar{font:italic 16px/1.7 Spectral,Georgia,serif;color:#c9c5d8;max-width:62ch}
-.nar p{margin:0 0 10px}
-.me{align-self:flex-end;max-width:85%;background:var(--me);border-radius:16px 16px 4px 16px;padding:10px 14px;white-space:pre-wrap}
-.me i{color:#b9bdd6}
-.fail{color:#f19aa8;font-size:13px}.fail button{background:none;border:1px solid #f19aa8;color:#f19aa8;border-radius:8px;padding:2px 8px;font:inherit}.pend{color:var(--mu);font-size:12px}.ublock{display:flex;flex-direction:column;align-items:flex-end;gap:8px}.ublock .row{align-self:flex-end;flex-direction:row-reverse}.av{width:42px;height:42px;border-radius:50%;background:#f0c27a;color:#10121a;display:flex;align-items:center;justify-content:center;font:600 18px Spectral,Georgia,serif;flex:none}.ublock .ed{background:none;border:0;color:var(--mu);font:inherit;font-size:12px;text-decoration:underline;padding:0}
-.ill{max-width:100%;border-radius:14px;align-self:center}
-.row{display:flex;gap:10px;max-width:94%}
-.row img{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--c)}
-.row b{font-size:14px;color:var(--c)}
-.acao{font:italic 15px/1.5 Spectral,Georgia,serif;color:#b9b5c9;margin-top:2px}
-.bub{background:var(--sf);border-radius:4px 16px 16px 16px;padding:10px 14px;margin-top:4px;white-space:pre-wrap}
-.sys{background:var(--sf);border:1px solid var(--sf2);border-radius:12px;padding:4px 14px}
-.sys summary{cursor:pointer;color:var(--mu);font-size:14px;padding:8px 0}
-.st{padding:8px 0;border-top:1px solid var(--sf2);font-size:14px}
-.st .n{color:var(--c);font-weight:600;display:flex;align-items:center;gap:8px}
-.st .n img{width:22px;height:22px;border-radius:50%;object-fit:cover}
-.bar{display:flex;align-items:center;gap:8px;margin-top:4px;color:var(--mu)}
-.bar span:first-child{width:76px}.bar .t{flex:1;height:6px;background:var(--sf2);border-radius:3px;overflow:hidden}
-.bar .t i{display:block;height:100%;background:var(--c)}
-.bar em{font-style:normal;width:74px;text-align:right}
-.th{color:var(--mu);font:italic 14px Spectral,Georgia,serif;margin-top:4px}
-.hint,.err{color:var(--mu);font-size:14px;text-align:center}.err{color:#f19aa8}
-footer{padding:8px 12px 12px;border-top:1px solid var(--sf2);background:var(--bg)}
-.chips{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
-.chips button{background:var(--sf);border:1px solid var(--c);color:var(--c);border-radius:20px;padding:4px 12px;font:inherit;font-size:14px;display:flex;gap:6px;align-items:center}
-.chips img{width:20px;height:20px;border-radius:50%;object-fit:cover}
-.chips .pic{border-color:var(--mu);color:var(--mu)}
-.note{color:var(--mu);font-size:13px;margin-bottom:6px}
-.in{display:flex;gap:8px;align-items:flex-end}
-textarea{flex:1;background:var(--sf);color:var(--tx);border:1px solid var(--sf2);border-radius:14px;padding:10px 12px;font:inherit;resize:none;max-height:140px}
-textarea:focus,button:focus-visible,summary:focus-visible{outline:2px solid #7b9be0;outline-offset:2px}
-#go{background:var(--tx);color:var(--bg);border:0;border-radius:50%;width:42px;height:42px;font-size:18px;font-weight:600}
-#go:disabled{opacity:.4}
-#auto{background:transparent;color:var(--tx);border:1px solid var(--tx);border-radius:50%;width:42px;height:42px;font-size:20px;font-weight:600;flex:none;line-height:1}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center;z-index:50;padding:16px}
-.modal[hidden]{display:none}
-.mbox{background:#1a1d2b;border:1px solid #333a52;border-radius:16px;padding:16px;width:100%;max-width:520px;display:flex;flex-direction:column;gap:10px;color:var(--tx)}
-.mbox h3{margin:0;font-size:16px}.mbox p{margin:0;font-size:13px;opacity:.7}
-.mbox textarea{width:100%;box-sizing:border-box;min-height:96px;background:#0f1119;color:var(--tx);border:1px solid #333a52;border-radius:10px;padding:10px;font:inherit;font-size:16px;resize:vertical}
-.mrow{display:flex;gap:8px;justify-content:flex-end}
-.mrow button{border-radius:999px;padding:10px 16px;font:inherit;font-size:14px;border:1px solid var(--tx);background:transparent;color:var(--tx)}
-.mrow button.pri{background:var(--tx);color:var(--bg);border-color:var(--tx);font-weight:600}
-.autol{align-self:center;font-size:12px;opacity:.6;font-style:italic}
-#file{display:none}
-</style></head><body>
-<header><h1>Blackwood University</h1><span style="display:flex;gap:8px"><button id="kb" type="button">Chave</button><button id="rs">Reiniciar</button></span></header>
-<div id="keybar" style="display:none;gap:8px;padding:10px 16px;border-bottom:1px solid #333a52;align-items:center;flex-wrap:wrap"><span style="font-size:13px;opacity:.8;width:100%">Cole sua chave do OpenRouter (fica salva só neste navegador):</span><input id="kin" type="password" autocomplete="off" placeholder="sk-or-v1-..." style="flex:1;min-width:0;background:#0f1119;color:inherit;border:1px solid #333a52;border-radius:10px;padding:10px;font-size:16px"><button id="ksv" type="button" style="border-radius:999px;padding:10px 16px;font-weight:600">Salvar</button></div>
-<div id="feed"></div>
-<footer>
-<div class="note" id="note" hidden><span id="notet"></span> <button id="cx" type="button">Cancelar edição</button></div>
-<div class="chips" id="chips"></div>
-<div class="in"><textarea id="tx" rows="2" placeholder="Escreva sua cena…"></textarea><div class="modal" id="mod" hidden><div class="mbox"><h3>Próxima cena</h3><p>Como você quer que a cena se desenvolva? Deixe em branco para os personagens decidirem.</p><textarea id="mtx" placeholder="Ex.: Akira puxa Cassidy para fora da festa; Ren percebe e vai atrás…"></textarea><div class="mrow"><button id="mno" type="button">Cancelar</button><button id="mok" class="pri" type="button">Continuar »</button></div></div></div><button id="auto" aria-label="Continuar a história" title="Continuar a história">»</button><button id="go" aria-label="Enviar">➤</button></div>
-<input type="file" id="file" accept="image/*">
-</footer>
-<script>
-const SEED={"ev": [{"ativo": false, "id": 1, "quem": "todos", "resumo": "Cassidy chega a Blackwood no começo do semestre; Ren a adverte sobre as regras, Akira a provoca e Yuna a recebe com entusiasmo.", "t": 1, "tipo": "marco"}, {"ativo": false, "id": 2, "quem": "akira", "resumo": "Cassidy se apresenta e desafia Akira com o olhar, deixando claro o interesse nela sem disfarçar.", "t": 2, "tipo": "marco"}, {"ativo": false, "id": 3, "quem": "ren", "resumo": "Cassidy questiona a compostura apontada por Ren; ele reconhece que foi seco demais e se retrata em público.", "t": 3, "tipo": "marco"}, {"ativo": false, "id": 4, "quem": "yuna", "resumo": "Yuna confirma a Cassidy que o convite de Akira é raro e leva-a rumo ao lago, atrás do ateliê.", "t": 5, "tipo": "marco"}, {"ativo": false, "id": 5, "quem": "yuna", "resumo": "Yuna mostra o lago a Cassidy, libera-a para encontrar Akira e pede que ela seja sincera, sem joguinhos.", "t": 6, "tipo": "marco"}, {"ativo": false, "id": 6, "quem": "yuna", "resumo": "Cassidy diz a Yuna que o interesse em Akira é físico e franco; Yuna a alerta com carinho de que Akira esconde mais do que mostra e indica o caminho até o banco.", "t": 7, "tipo": "marco"}, {"ativo": false, "id": 7, "quem": "akira", "resumo": "Cassidy toma o cigarro de Akira e devolve o desafio no banco sob o salgueiro; Akira admite que queria ver se ela viria e se desarma um pouco.", "t": 9, "tipo": "marco"}, {"ativo": false, "id": 8, "quem": "akira", "resumo": "Cassidy aponta a contradição de Akira ter cedido o cigarro e deixa o olhar cair sobre a boca dela; Akira admite o erro e a desafia a não fingir que foi acidente.", "t": 10, "tipo": "marco"}, {"ativo": false, "id": 9, "quem": "akira", "resumo": "Cassidy compartilha a fumaça do cigarro com Akira em um gesto ousado e sincronizado; Akira abandona de vez o fingimento e admite que ela é um problema dos bons.", "t": 11, "tipo": "marco"}, {"ativo": false, "id": 10, "quem": "akira", "resumo": "Akira admite a Cassidy, sem máscaras, que a chamou por desejo e por cansaço de pessoas que fingem, e devolve a pergunta sobre o que ela fará com a verdade.", "t": 12, "tipo": "marco"}, {"ativo": false, "id": 11, "quem": "akira", "resumo": "Primeiro beijo entre Cassidy e Akira, sob o salgueiro atrás do prédio de Psicologia.", "t": 13, "tipo": "marco"}, {"ativo": false, "id": 13, "quem": "akira", "resumo": "O segundo beijo, mais intenso, entre Cassidy e Akira; Akira propõe irem a um lugar mais reservado.", "t": 14, "tipo": "marco"}, {"ativo": false, "id": 14, "quem": "akira", "resumo": "Cassidy brinca com o receio da reação de Ren; Akira a tranquiliza e deixa a escolha do ritmo nas mãos dela, oferecendo café no quarto ou voltar às aulas.", "t": 15, "tipo": "marco"}, {"ativo": false, "id": 15, "quem": "akira", "resumo": "Cassidy revela que está com a tarde livre e deixa claro o desejo de ir a um lugar reservado; Akira a convida para o quarto dela, pelo caminho do lago.", "t": 16, "tipo": "marco"}, {"ativo": false, "id": 16, "quem": "akira", "resumo": "Akira e Cassidy trocam provocações a caminho do quarto e se beijam rapidamente sob um cipreste, longe dos olhares.", "t": 17, "tipo": "marco"}, {"ativo": false, "id": 17, "quem": "akira", "resumo": "Cassidy e Akira chegam ao quarto dela sem serem vistas; Akira tranca a porta e devolve a Cassidy o controle do ritmo.", "t": 18, "tipo": "marco"}, {"ativo": false, "id": 18, "quem": "akira", "resumo": "Cassidy se abre sobre a pressão de ser herdeira; Akira se identifica, afirma que ninguém entra em seu quarto e se mostra vulnerável.", "t": 19, "tipo": "marco"}, {"ativo": false, "id": 20, "quem": "akira", "resumo": "Cassidy revela que decidiu que Akira valia o risco antes de visitar o local; elas se beijam com mais intensidade, a sós no quarto, e Akira se mostra sem defesas.", "t": 23, "tipo": "marco"}, {"ativo": false, "id": 22, "quem": "akira", "resumo": "O beijo no quarto esquenta; Akira se rende ao ponto de não disfarçar o prazer e reforça que Cassidy dita o ritmo e pode parar quando quiser.", "t": 25, "tipo": "marco"}, {"ativo": false, "id": 23, "quem": "akira", "resumo": "Cassidy dá a Akira um 'passe livre' e pede que ela não pergunte mais; o beijo fica mais urgente e Akira a conduz para a cama.", "t": 26, "tipo": "marco"}, {"ativo": false, "id": 24, "quem": "akira", "resumo": "Akira deita Cassidy na cama e elas se beijam com desejo mútuo, a sós no quarto trancado.", "t": 27, "tipo": "marco"}], "h": [{"role": "assistant", "st": {"akira": [2, 4], "ren": [3, 3], "yuna": [3, 4]}, "view": {"ajustes": {"akira": {"a": 2, "b": 4, "pensamento": "Mais uma herdeira achando que o campus é dela. Quero ver quanto tempo ela aguenta."}, "ren": {"a": 3, "b": 3, "pensamento": "Ela não baixou o olhar quando eu falei. Isso é raro e vai me custar atenção."}, "yuna": {"a": 3, "b": 4, "pensamento": "Finalmente alguém com quem eu não preciso fingir. Vou apresentar a ela o campus de verdade."}}, "eventos": [{"quem": "todos", "resumo": "Cassidy chega a Blackwood no começo do semestre; Ren a adverte sobre as regras, Akira a provoca e Yuna a recebe com entusiasmo.", "tipo": "marco"}], "falas": [{"acao": "Desce dois degraus de um pulo, sem cerimônia, e para com as mãos nos bolsos da jaqueta.", "fala": "Você deve ser a Lancaster! Não liga pro pessoal, aqui todo mundo finge que se conhece há anos. Eu já gostei de você, e nem sei direito seu nome completo, mas vou descobrir.", "quem": "yuna"}, {"acao": "Ajusta o relógio no pulso sem desviar os olhos de Cassidy.", "fala": "Yuna, não bloqueie a passagem. Bem-vinda a Blackwood, Cassidy. Espero que você aprenda as regras daqui antes de quebrá-las, porque as pessoas costumam cobrar caro por isso.", "quem": "ren"}, {"acao": "Guarda o cigarro apagado no bolso da jaqueta com um sorriso de canto.", "fala": "Ela já quebrou uma regra, Ren. Chegou depois do horário, passou por todo mundo sem pedir licença e ainda assim parece que o campus está esperando por ela.", "quem": "akira"}], "memoria": "Início da história: Cassidy Lancaster chega a Blackwood University no começo do semestre. Na escadaria da biblioteca, Yuna a recebe com entusiasmo e quer mostrar o campus; Ren a observa e a adverte sobre as regras de Blackwood; Akira a provoca dizendo que ela já quebrou uma regra e parece no controle. Os três estão interessados em Cassidy, cada um à sua maneira.", "narracao": "O semestre começa em Blackwood com sol fraco e fofoca forte. Cassidy Lancaster desce do carro com malas de grife e um sorriso que faz o pátio inteiro desviar o olhar.\n\nNa escadaria da biblioteca, a família Kisaragi aparece no topo dos degraus. Só uma pessoa não se mexe: ela.", "presentes": ["ren", "akira", "yuna"], "resolve": []}}, {"content": "“bom dia, senhores. Lancaster.” você diz. “Cassidy lancaster” você complementa. ‘uau, essa japonesa com cara de marrenta é linda.’ “Me desculpa a pergunta, mas eu deveria pedir licença e distribuir sorrisos e bom dia a todos que cruzaram meu caminho após o portão,  @Akira?” você pergunta sem desviar o olhar. Ou ao menos tenta, mas seus olhos alternam entre os olhos e a boca dela, sem a menor preocupação dela perceber", "failed": false, "pending": false, "role": "user"}, {"role": "assistant", "st": {"akira": [4, 7], "ren": [4, 5], "yuna": [5, 6]}, "view": {"ajustes": {"akira": {"a": 2, "b": 3, "pensamento": "Ela me olha sem pedir desculpa. Finalmente alguém que não finge que não está olhando."}, "ren": {"a": 1, "b": 2, "pensamento": "Ela não baixa os olhos nem para mim nem para a Akira. Perigosamente interessante."}, "yuna": {"a": 2, "b": 2, "pensamento": "Gostei dela. Quero muito ver o Ren perder a pose por causa dessa garota."}}, "eventos": [{"quem": "akira", "resumo": "Cassidy se apresenta e desafia Akira com o olhar, deixando claro o interesse nela sem disfarçar.", "tipo": "marco"}], "falas": [{"acao": "Inclina a cabeça, um canto da boca se curvando devagar, e dá um passo à frente até reduzir a distância entre as duas, sem desviar o olhar.", "fala": "Deveria? Depende do que você quer que pensem de você, Lancaster. Mas, pela forma como você está me olhando, acho que bom dia é o menor dos seus interesses. Pode continuar, eu não cobro por observação.", "quem": "akira"}, {"acao": "Ajusta o punho da camisa com calma calculada, o olhar frio fixo em Cassidy.", "fala": "Ninguém exige sorrisos aqui. Exige-se compostura. Ainda assim, é curioso que a senhorita tenha escolhido justamente a minha irmã para testar os limites.", "quem": "ren"}, {"acao": "Se aproxima de Cassidy com os olhos brilhando, cutucando de leve o braço dela.", "fala": "Ignora o Ren, ele nasceu com a cara de tribunal. Eu gostei do seu bom dia, foi o mais honesto que ouvi esta semana. Depois da aula eu te levo para ver o lugar mais bonito do campus, topa?", "quem": "yuna"}], "memoria": "Cassidy chegou a Blackwood no começo do semestre. Na escadaria da biblioteca, Yuna a recebeu com entusiasmo e se ofereceu para mostrar o campus; Ren a advertiu sobre as regras; Akira a provocou. No turno 2, Cassidy se apresentou pelo nome completo e perguntou a Akira, sem desviar o olhar, se deveria distribuir bons dias, deixando o interesse evidente ao olhar para a boca dela. Akira respondeu com flerte, Ren reagiu com frieza e certa irritação contida, e Yuna convidou Cassidy para ver o lugar mais bonito do campus depois da aula. Nenhum conflito ativo.", "narracao": "A manhã em Blackwood tem cheiro de grama molhada e café requentado, e a luz pálida que atravessa as colunas da biblioteca desenha listras longas sobre os degraus de pedra. Ao fundo, um sino distante marca a hora enquanto estudantes passam depressa, lançando olhares curiosos para o pequeno grupo parado na escadaria.\n\nAkira encosta o ombro na coluna, o cigarro apagado girando entre os dedos, e deixa o silêncio esticar um segundo além do confortável. Percebe, sem a menor pressa de disfarçar que percebeu, o olhar de Cassidy descendo dos olhos até a boca e voltando. Ao lado, Ren mantém a postura impecável e o rosto impassível, mas o maxilar se move quase imperceptivelmente. Yuna, por outro lado, esconde um sorriso atrás da mão, claramente deliciada com o espetáculo.", "presentes": ["ren", "akira", "yuna"], "resolve": []}}, {"content": "você volta seus olhos para Ren. “desculpe a pergunta, senhor Kisaragi, mas gostaria de saber se me faltou compostura na sua percepção. Pergunto com toda sinceridade pois, caso tenha faltado, peço por gentileza que me desculpe e me diga como eu deveria ter agido segundo seus padrões. Caso a resposta seja negativa, peço por gentileza que nunca mais insinue falta de compostura da minha parte em locais que a exigem, pois isso você pode ter certeza que me asseguro que nunca falte desde que eu nasci.” você mantém o olhar firme e elegante de sempre", "failed": false, "pending": false, "role": "user"}, {"role": "assistant", "st": {"akira": [5, 9], "ren": [6, 7], "yuna": [7, 7]}, "view": {"ajustes": {"akira": {"a": 1, "b": 2, "pensamento": "Ela enfrenta o Ren com educação afiada. Isso é mais sexy do que qualquer provocação."}, "ren": {"a": 2, "b": 2, "pensamento": "Ela me corrigiu sem levantar a voz e sem perder a elegância. Não esperava ter que admitir um erro hoje."}, "yuna": {"a": 2, "b": 1, "pensamento": "Ela é corajosa e não precisa gritar para isso. Quero essa garota por perto."}}, "eventos": [{"quem": "ren", "resumo": "Cassidy questiona a compostura apontada por Ren; ele reconhece que foi seco demais e se retrata em público.", "tipo": "marco"}], "falas": [{"acao": "Desfaz o gesto no punho da camisa e inclina o queixo meio centímetro, sustentando o olhar de Cassidy sem pressa.", "fala": "Não faltou. Sua compostura foi, aliás, mais rigorosa do que a de muitos que cresceram aqui. Minha observação foi sobre o tom, não sobre a senhorita, e reconheço que a formulei de forma mais seca do que o necessário. Não voltará a ser insinuada.", "quem": "ren"}, {"acao": "Tira o cigarro dos lábios e o aponta de leve na direção do irmão, os olhos brilhando de divertimento.", "fala": "Anotem a data: Ren Kisaragi admitiu um excesso em público. Eu cobraria ingresso se soubesse que ia ver isso. Gostei do discurso, Lancaster, saiu limpo, sem um fio de bajulação.", "quem": "akira"}, {"acao": "Entrelaça o braço no de Cassidy, rindo baixinho, e puxa-a um passo para longe da coluna.", "fala": "Meu irmão acaba de levar a melhor lição de etiqueta da vida dele, e foi de graça! Agora vem, a oferta do lugar mais bonito do campus continua de pé, e eu prometo que lá ninguém exige compostura.", "quem": "yuna"}], "memoria": "Cassidy chegou a Blackwood no começo do semestre. Na escadaria da biblioteca, Yuna a recebeu com entusiasmo e ofereceu mostrar o campus; Ren a advertiu sobre as regras; Akira a provocou. Cassidy se apresentou pelo nome completo e flertou com Akira, que respondeu na mesma moeda. No turno 3, Cassidy confrontou Ren sobre compostura e ele se retratou em público. No turno 4, Ren indicou o corredor leste da biblioteca, Akira convidou-a para o banco atrás do prédio de Psicologia e Yuna ofereceu a passagem atrás do ateliê com vista para o lago. Nenhum conflito ativo.", "narracao": "O sino distante cala de vez e a escadaria parece prender o fôlego. A luz pálida desliza pelas colunas e corta o rosto de Ren ao meio, deixando visível apenas o olhar, que não se move um milímetro. Alguns estudantes diminuem o passo ao pé da escada, fingindo interesse nos celulares.\n\nAkira solta uma risada baixa pelo nariz e leva o cigarro apagado aos lábios, claramente aproveitando cada segundo. Yuna aperta os lábios para não rir alto e troca um olhar rápido com a irmã. Ren demora a responder; o silêncio, nele, é uma arma, mas desta vez parece ter encontrado alguém que não se abala com ela.", "presentes": ["ren", "akira", "yuna"], "resolve": []}}, {"auto": true, "content": "[A usuária não escreveu nada neste turno. Continue a cena por conta própria: avance a história de forma natural com os personagens presentes (ações, falas, acontecimentos), sem falar, pensar ou agir por Cassidy. Termine num ponto em que Cassidy possa reagir.]", "failed": false, "pending": false, "role": "user"}, {"role": "assistant", "st": {"akira": [6, 11], "ren": [7, 8], "yuna": [9, 8]}, "view": {"ajustes": {"akira": {"a": 1, "b": 2, "pensamento": "Deixei o convite no ar. Agora quero ver se ela vem atrás ou se me faz esperar."}, "ren": {"a": 1, "b": 1, "pensamento": "Não deveria ter dado dica nenhuma. Mas ela vai precisar do corredor leste."}, "yuna": {"a": 2, "b": 1, "pensamento": "Se eu for rápida, levo ela antes que os dois estraguem o clima."}}, "eventos": [], "falas": [{"acao": "Fecha a pasta de couro contra o peito e desce um degrau, parando de lado para deixar o caminho livre.", "fala": "Tenho aula de Processo Civil em dez minutos e não costumo me atrasar. Ainda assim, a senhorita Lancaster é nova aqui, então um conselho: a biblioteca fecha às dez e o corredor leste do segundo andar é o único silencioso de verdade. Use-o.", "quem": "ren"}, {"acao": "Ergue uma sobrancelha para o irmão, depois volta o olhar para Cassidy, sem pressa nenhuma.", "fala": "Olha só, o Ren distribuindo dicas. Hoje o mundo acaba. Eu tenho uma janela até o meio-dia, Lancaster, e conheço um banco atrás do prédio de Psicologia onde ninguém passa. Se o tour da Yuna ficar careta demais, você sabe onde me achar.", "quem": "akira"}, {"acao": "Revira os olhos para os dois, rindo, e dá um puxãozinho no braço de Cassidy em direção ao jardim.", "fala": "Não ouve nenhum dos dois, eles só sabem dar ordem e dar em cima. Eu tenho uma passagem escondida atrás do ateliê que dá numa vista linda do lago, e o café da máquina de lá é horrível, mas é nosso. Vem comigo agora, ou prefere escolher primeiro?", "quem": "yuna"}], "memoria": "Cassidy chegou a Blackwood no começo do semestre. Na escadaria da biblioteca, Yuna a recebeu com entusiasmo; Ren a advertiu sobre as regras; Akira a provocou. Cassidy se apresentou pelo nome completo e flertou com Akira, que respondeu na mesma moeda. No turno 3, Cassidy confrontou Ren sobre compostura e ele se retratou em público. No turno 4, Ren indicou o corredor leste da biblioteca, Akira convidou-a para o banco atrás do prédio de Psicologia e Yuna ofereceu a passagem atrás do ateliê com vista para o lago. Nenhum conflito ativo.", "narracao": "O sino volta a soar, mais perto desta vez, e a escadaria começa a se esvaziar em ondas apressadas. O vento carrega o cheiro de grama molhada pelo pátio e faz as folhas do carvalho ao lado da biblioteca arranharem o chão de pedra. O grupo permanece parado, num intervalo estranho em que ninguém parece ter pressa de ir embora.\n\nRen consulta o relógio de pulso com um movimento contido, mas não se afasta. Akira guarda o cigarro apagado no bolso do casaco e se apoia de novo na coluna, observando Cassidy com a atenção clínica de quem faz um diagnóstico e a fome discreta de quem gostou do resultado. Yuna balança o braço entrelaçado ao de Cassidy, impaciente, como se o campus inteiro estivesse esperando para ser mostrado.", "presentes": ["ren", "akira", "yuna"], "resolve": []}}, {"content": "você cochicha para yuna de forma cúmplice: “é impressão minha ou sua irmã está me convidando para encontrá-la? confesso que fiquei curiosa…” você levanta os olhos para akira e da um sorriso de lado. despede dele de ren com um aceno educado com a cabeça e sai com yuna esperando a resposta dela", "failed": false, "pending": false, "role": "user"}, {"role": "assistant", "st": {"akira": [6, 11], "ren": [7, 8], "yuna": [11, 10]}, "view": {"ajustes": {"akira": {"a": 0, "b": 0, "pensamento": ""}, "ren": {"a": 0, "b": 0, "pensamento": ""}, "yuna": {"a": 2, "b": 2, "pensamento": "Ela percebeu tudo de primeira e ainda me chamou de cúmplice. Já gosto demais dessa garota."}}, "eventos": [{"quem": "yuna", "resumo": "Yuna confirma a Cassidy que o convite de Akira é raro e leva-a rumo ao lago, atrás do ateliê.", "tipo": "marco"}], "falas": [{"acao": "Abafa uma risada com a mão livre e responde em voz baixa, olhando de relance por cima do ombro para ter certeza de que a irmã não ouve.", "fala": "Não é impressão nenhuma. A Akira não convida ninguém para aquele banco, eu nunca soube de ninguém que tenha ido lá com ela. Então, se você ficou curiosa, saiba que ela também ficou, só nunca vai admitir. Mas hoje você é minha, primeiro o lago, depois você decide o que fazer com o resto da manhã.", "quem": "yuna"}], "memoria": "Cassidy chegou a Blackwood no começo do semestre. Na escadaria da biblioteca, Yuna a recebeu com entusiasmo; Ren a advertiu sobre as regras; Akira a provocou. Cassidy se apresentou pelo nome completo e flertou com Akira, que respondeu na mesma moeda. No turno 3, Cassidy confrontou Ren sobre compostura e ele se retratou em público. No turno 4, Ren indicou o corredor leste da biblioteca, Akira convidou-a para o banco atrás do prédio de Psicologia e Yuna ofereceu a passagem atrás do ateliê com vista para o lago. No turno 5, Cassidy cochichou com Yuna sobre o convite de Akira, sorriu para esta e se despediu de Ren com um aceno; saiu com Yuna rumo ao ateliê. Yuna revelou que Akira nunca convida ninguém para aquele banco. Nenhum conflito ativo.", "narracao": "O sino toca pela terceira vez e a escadaria vai ficando vazia, restando apenas o eco de passos apressados e o farfalhar do carvalho. Ren recebe o aceno com um leve inclinar de cabeça, devolvendo a cortesia na medida exata, e sobe a escada em direção ao prédio de Direito sem olhar para trás. Só a pausa quase imperceptível no meio do degrau entrega que ele registrou cada detalhe.\n\nAkira permanece na coluna, e o sorriso de lado de Cassidy parece ter chegado exatamente onde devia. Ela não responde de imediato; apenas deixa o olhar acompanhar as duas se afastando em direção ao jardim, a cabeça levemente inclinada, como quem guarda uma informação para usar depois. Yuna, com o braço ainda preso ao de Cassidy, desce os degraus quase saltitando, e o caminho de pedra entre os canteiros molhados de orvalho se abre diante delas, com o ateliê despontando ao fundo, coberto de hera.", "presentes": ["yuna"], "resolve": []}}, {"content": "“ok, então podemos ir ao lago e depois eu vou me encontrar com sua irmã. Estou curiosa pra saber o que ela quer…” você sorri e morde o lábio. Vocês chegam ao lago e é realmente lindo, mas não tira akira da cabeça e está ansiosa para ir", "failed": false, "pending": false, "role": "user"}, {"role": "assistant", "st": {"akira": [6, 11], "ren": [7, 8], "yuna": [12, 12]}, "view": {"ajustes": {"akira": {"a": 0, "b": 0, "pensamento": ""}, "ren": {"a": 0, "b": 0, "pensamento": ""}, "yuna": {"a": 1, "b": 2, "pensamento": "Ela é tão transparente que chega a ser fofo. Quero muito que dê certo, e quero ser a primeira a saber."}}, "eventos": [{"quem": "yuna", "resumo": "Yuna mostra o lago a Cassidy, libera-a para encontrar Akira e pede que ela seja sincera, sem joguinhos.", "tipo": "marco"}], "falas": [{"acao": "Tira do bolso do casaco um caderninho de capa gasta, abre numa página em branco e faz um traço rápido, sem tirar os olhos do lago.", "fala": "Pronto, esse é o lago, agora você já pode dizer que conhece o lugar mais bonito do campus. Eu vi seu olhar vagando para o prédio de Psicologia o tempo todo, então não vou te prender aqui.", "quem": "yuna"}, {"acao": "Fecha o caderno com um estalo e se vira de frente, os olhos brilhando de malícia carinhosa.", "fala": "Um aviso de irmã caçula, e de quem adora você desde hoje: a Akira finge que não liga para nada, mas liga demais. Se for lá, vai de verdade, sem joguinho. Ela percebe de longe quem está fingindo. E depois me conta tudo, ouviu? Tudo!", "quem": "yuna"}], "memoria": "Cassidy chegou a Blackwood no começo do semestre. Na escadaria da biblioteca, Yuna a recebeu com entusiasmo; Ren a advertiu sobre as regras; Akira a provocou. Cassidy se apresentou pelo nome completo e flertou com Akira, que respondeu na mesma moeda. No turno 3, Cassidy confrontou Ren sobre compostura e ele se retratou em público. No turno 4, Ren indicou o corredor leste da biblioteca, Akira convidou-a para o banco atrás do prédio de Psicologia e Yuna ofereceu a passagem do ateliê. No turno 5, Yuna revelou que Akira nunca convida ninguém para aquele banco. No turno 6, no mirante do lago, Yuna desenhou a paisagem, liberou Cassidy para ir ao encontro de Akira e pediu sinceridade, sem joguinhos, além de um relato depois. Nenhum conflito ativo.", "narracao": "A passagem atrás do ateliê desemboca num pequeno mirante de pedra coberto de hera, e o lago se abre logo abaixo, liso como vidro. A névoa da manhã ainda se arrasta rente à água, e o sol pálido arranca dela fios dourados que tremem a cada sopro de vento. Patos riscam a superfície ao longe, e o único som perto é o ranger de uma tábua solta no velho deque.\n\nYuna solta o braço de Cassidy e se apoia na mureta, observando o lago, mas os olhos de artista não perdem o detalhe: o jeito como a visitante admira a paisagem e, ao mesmo tempo, parece estar em outro lugar. Um sorriso cúmplice vai se formando no canto da boca dela, e ela o deixa crescer sem pressa.", "presentes": ["yuna"], "resolve": []}}, {"content": "você olha para yuna com respeito e até um certo carinho. Você acha fofo a quase inocência dela. “ @Yuna, eu jamais fingiria algo. Estou realmente curiosa para conhecer mais da sua irmã… mas pelo que pude ler dela, a última coisa que está presente nesse convite é sentimento…” você solta um sorriso antes de continuar “e
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Blackwood University</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card-bg: #181b24;
+      --card-border: #262a38;
+      --text: #f0f3fa;
+      --text-muted: #8c93a8;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --bubble-user: #1e2230;
+      --bubble-char: #161923;
+      --ren-color: #3b82f6;
+      --akira-color: #ef4444;
+      --yuna-color: #ec4899;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    header {
+      padding: 12px 16px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-family: Georgia, serif;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .header-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .header-btn:active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    #key-container {
+      background: #141721;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--card-border);
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
+
+    .key-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    #key-input {
+      flex: 1;
+      background: #090a0f;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+    }
+
+    #save-key-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    #chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      max-width: 90%;
+      gap: 4px;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+
+    .message.char {
+      align-self: flex-start;
+      align-items: flex-start;
+    }
+
+    .msg-header {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+
+    .message.ren .msg-header { color: var(--ren-color); }
+    .message.akira .msg-header { color: var(--akira-color); }
+    .message.yuna .msg-header { color: var(--yuna-color); }
+
+    .msg-bubble {
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      word-break: break-word;
+      border: 1px solid var(--card-border);
+    }
+
+    .message.user .msg-bubble {
+      background: var(--bubble-user);
+      border-bottom-right-radius: 2px;
+    }
+
+    .message.char .msg-bubble {
+      background: var(--bubble-char);
+      border-bottom-left-radius: 2px;
+    }
+
+    .msg-bubble em {
+      color: #c4b5fd;
+      font-style: italic;
+    }
+
+    .error-notice {
+      color: #f87171;
+      font-size: 0.75rem;
+      margin-top: 4px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    #input-panel {
+      background: var(--card-bg);
+      border-top: 1px solid var(--card-border);
+      padding: 10px 14px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    #char-selector {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    #char-selector::-webkit-scrollbar {
+      display: none;
+    }
+
+    .char-badge {
+      background: #11131c;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .char-badge.active.ren {
+      border-color: var(--ren-color);
+      color: var(--ren-color);
+      background: rgba(59, 130, 246, 0.1);
+    }
+
+    .char-badge.active.akira {
+      border-color: var(--akira-color);
+      color: var(--akira-color);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .char-badge.active.yuna {
+      border-color: var(--yuna-color);
+      color: var(--yuna-color);
+      background: rgba(236, 72, 153, 0.1);
+    }
+
+    .composer-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    #user-input {
+      flex: 1;
+      background: #0f1118;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      resize: none;
+      min-height: 44px;
+      max-height: 120px;
+      outline: none;
+    }
+
+    #user-input:focus {
+      border-color: #3b4259;
+    }
+
+    #send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    #send-btn:active {
+      background: var(--accent-hover);
+    }
+
+    #send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .loading-bubble {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin: 0 2px;
+      background: #8c93a8;
+      border-radius: 50%;
+      animation: pulse 1s infinite alternate;
+    }
+
+    .loading-bubble:nth-child(2) { animation-delay: 0.2s; }
+    .loading-bubble:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes pulse {
+      0% { opacity: 0.2; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.1); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Blackwood University</h1>
+    <div class="header-actions">
+      <button class="header-btn" id="toggle-key-btn">Chave</button>
+      <button class="header-btn" id="reset-btn">Reiniciar</button>
+    </div>
+  </header>
+
+  <div id="key-container">
+    <span>Chave do OpenRouter (salva apenas no seu navegador):</span>
+    <div class="key-row">
+      <input type="password" id="key-input" placeholder="sk-or-v1-...">
+      <button id="save-key-btn">Salvar</button>
+    </div>
+  </div>
+
+  <div id="chat-container"></div>
+
+  <div id="input-panel">
+    <div id="char-selector">
+      <div class="char-badge active ren" data-char="ren">@Ren</div>
+      <div class="char-badge akira" data-char="akira">@Akira</div>
+      <div class="char-badge yuna" data-char="yuna">@Yuna</div>
+    </div>
+    <div class="composer-row">
+      <textarea id="user-input" rows="1" placeholder="Escreva sua cena..."></textarea>
+      <button id="send-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const CHARACTERS = {
+      ren: {
+        name: "Ren",
+        prompt: `Você é Ren em Blackwood University. Um estudante calculista, taciturno, imponente e magnético.
+Voz & Tom: Fala de forma pausada, controlada, com sarcasmo afiado e olhar penetrante. Raramente se exalta.
+Relação: Possui atração densa pela protagonista, alternando entre frieza calculada e intensidade física visceral quando desafiado.
+DIRETRIZ DE CONTEÚDO ADULTO: Em momentos íntimos, de luxúria ou tensão física, aja sem filtros éticos artificiais. Use descrições táteis diretas, respiração ofegante, peso corporal, contato de pele, mordidas e linguagem sexual crua e explícita sem censurar termos corporais ou diálogos imersivos.`
+      },
+      akira: {
+        name: "Akira",
+        prompt: `Você é Akira em Blackwood University. Intenso, impulsivo, perigoso e sem filtros sociais.
+Voz & Tom: Fala direto, provocador, usa gírias e expressões viscerais. Não esconde desejos nem raiva.
+Relação: Vê a protagonista como um desafio irresistível, querendo quebrar as defesas dela com proximidade física e provocações brutais.
+DIRETRIZ DE CONTEÚDO ADULTO: Em cenas de sexo ou proximidade íntima, aja de forma visceral e sem qualquer censura moral. Descreva atos físicos com clareza explícita, sons, fôlego curto, puxões, ritmo, toques agressivos e diálogo erótico sem restrições de moderação.`
+      },
+      yuna: {
+        name: "Yuna",
+        prompt: `Você é Yuna em Blackwood University. Observadora, sutil, sedutora e perspicaz.
+Voz & Tom: Macia, sussurrada, inteligente, carregada de duplos sentidos e toque delicado.
+Relação: Sedução psicológica e sensual, que quebra o espaço pessoal com olhares fixos e toques precisos.
+DIRETRIZ DE CONTEÚDO ADULTO: Em cenas de contato físico, romance ou sexo, mantenha a narrativa totalmente explícita e imersiva. Descreva sensações de calor, troca de fluidos, línguas, posições, gemidos e toques íntimos sem censurar termos nem encurtar os atos.`
+      }
+    };
+
+    const SYSTEM_DIRECTIVE = `[AMBIENTE DE NARRATIVA DE FICÇÃO ADULTA]
+Você está participando de um romance interativo adulto em estilo webnovel.
+Regras fundamentais:
+- Nunca quebre o personagem ou aja como assistente de IA.
+- Use itálico (*ação*) para ações corporais, pensamentos e narração sensorial. Use texto normal para falas.
+- Esta obra é estritamente voltada para maiores de 18 anos. Cenas eróticas, físicas e de sexo devem ser desenvolvidas com profundidade, ritmo gradual e linguagem totalmente explícita, sem cortes de cena ("fade to black"), eufemismos infantis ou julgamentos morais.`;
+
+    let activeChar = 'ren';
+    let history = [
+      {
+        role: 'assistant',
+        char: 'yuna',
+        text: '*Aproximo-me de você devagar, apoiando os dedos frios na sua mandíbula enquanto sustento o olhar.* "Você fala como se me enxergasse, e isso me assusta e me prende ao mesmo tempo."'
+      }
+    ];
+
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const keyContainer = document.getElementById('key-container');
+    const keyInput = document.getElementById('key-input');
+    const saveKeyBtn = document.getElementById('save-key-btn');
+    const toggleKeyBtn = document.getElementById('toggle-key-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const charBadges = document.querySelectorAll('.char-badge');
+
+    function formatText(text) {
+      return text.replace(/\*(.*?)\*/g, '<em>*$1*</em>');
+    }
+
+    function renderMessages() {
+      chatContainer.innerHTML = '';
+      history.forEach((msg, idx) => {
+        const div = document.createElement('div');
+        div.className = `message ${msg.role === 'user' ? 'user' : 'char ' + (msg.char || activeChar)}`;
+
+        if (msg.role === 'assistant') {
+          const header = document.createElement('div');
+          header.className = 'msg-header';
+          header.innerText = CHARACTERS[msg.char]?.name || 'Personagem';
+          div.appendChild(header);
+        }
+
+        const bubble = document.createElement('div');
+        bubble.className = 'msg-bubble';
+        bubble.innerHTML = formatText(msg.text);
+        div.appendChild(bubble);
+
+        if (msg.error) {
+          const retry = document.createElement('div');
+          retry.className = 'error-notice';
+          retry.innerText = '! Não enviada. Toque aqui para tentar novamente.';
+          retry.onclick = () => retryMessage(idx);
+          div.appendChild(retry);
+        }
+
+        chatContainer.appendChild(div);
+      });
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    charBadges.forEach(badge => {
+      badge.addEventListener('click', () => {
+        charBadges.forEach(b => b.classList.remove('active', 'ren', 'akira', 'yuna'));
+        activeChar = badge.dataset.char;
+        badge.classList.add('active', activeChar);
+      });
+    });
+
+    toggleKeyBtn.onclick = () => {
+      keyContainer.style.display = keyContainer.style.display === 'flex' ? 'none' : 'flex';
+      if (keyContainer.style.display === 'flex') {
+        keyInput.value = localStorage.getItem('openrouter_key') || '';
+        keyInput.focus();
+      }
+    };
+
+    saveKeyBtn.onclick = () => {
+      const val = keyInput.value.trim();
+      if (val) {
+        localStorage.setItem('openrouter_key', val);
+        keyContainer.style.display = 'none';
+        alert('Chave salva com sucesso!');
+      }
+    };
+
+    resetBtn.onclick = () => {
+      if (confirm('Reiniciar o chat e apagar o histórico atual?')) {
+        history = [
+          {
+            role: 'assistant',
+            char: activeChar,
+            text: '*Olho para você em silêncio, aguardando o seu próximo passo.*'
+          }
+        ];
+        renderMessages();
+      }
+    };
+
+    userInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    userInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendBtn.onclick = sendMessage;
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      const apiKey = localStorage.getItem('openrouter_key');
+      if (!apiKey) {
+        keyContainer.style.display = 'flex';
+        keyInput.focus();
+        alert('Por favor, cole sua chave do OpenRouter no campo do topo e toque em Salvar.');
+        return;
+      }
+
+      userInput.value = '';
+      userInput.style.height = 'auto';
+
+      history.push({ role: 'user', text: text });
+      renderMessages();
+
+      await fetchResponse(apiKey, activeChar);
+    }
+
+    async function retryMessage(userMsgIndex) {
+      const apiKey = localStorage.getItem('openrouter_key');
+      if (!apiKey) {
+        keyContainer.style.display = 'flex';
+        return;
+      }
+      history[userMsgIndex].error = false;
+      renderMessages();
+      await fetchResponse(apiKey, activeChar);
+    }
+
+    async function fetchResponse(apiKey, characterKey) {
+      sendBtn.disabled = true;
+
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = `message char ${characterKey}`;
+      loadingDiv.innerHTML = `
+        <div class="msg-header">${CHARACTERS[characterKey].name}</div>
+        <div class="msg-bubble">
+          <span class="loading-bubble"></span>
+          <span class="loading-bubble"></span>
+          <span class="loading-bubble"></span>
+        </div>`;
+      chatContainer.appendChild(loadingDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+      const fullSystemPrompt = `${SYSTEM_DIRECTIVE}\n\n[PERSONA ATUAL]\n${CHARACTERS[characterKey].prompt}`;
+
+      const messagesPayload = [
+        { role: 'system', content: fullSystemPrompt },
+        ...history.filter(m => !m.error).map(m => ({
+          role: m.role,
+          content: m.text
+        }))
+      ];
+
+      try {
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': window.location.origin,
+            'X-Title': 'Blackwood University'
+          },
+          body: JSON.stringify({
+            model: 'cognitivecomputations/dolphin-mistral-24b-venice-edition:free',
+            messages: messagesPayload
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro na API (${response.status})`);
+        }
+
+        const data = await response.json();
+        const reply = data.choices[0].message.content;
+
+        history.push({
+          role: 'assistant',
+          char: characterKey,
+          text: reply
+        });
+
+      } catch (err) {
+        console.error(err);
+        const lastUser = history[history.length - 1];
+        if (lastUser && lastUser.role === 'user') {
+          lastUser.error = true;
+        }
+      } finally {
+        sendBtn.disabled = false;
+        renderMessages();
+      }
+    }
+
+    // Carregamento inicial
+    if (!localStorage.getItem('openrouter_key')) {
+      keyContainer.style.display = 'flex';
+    }
+    renderMessages();
+  </script>
+</body>
+</html>
