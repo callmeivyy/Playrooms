@@ -1,320 +1,320 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Blackwood University</title>
-  <style>
-    :root {
-      --bg: #0f1118;
-      --card-bg: #141721;
-      --border: #232736;
-      --text: #e6e8f0;
-      --text-muted: #8b92a5;
-      --bubble-user: #181c28;
-      --bubble-char: #141722;
-      --ren-color: #3b82f6;
-      --akira-color: #ef4444;
-      --yuna-color: #d946ef;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Blackwood University</title>
+  <style>
+    :root {
+      --bg: #0f1118;
+      --card-bg: #141721;
+      --border: #232736;
+      --text: #e6e8f0;
+      --text-muted: #8b92a5;
+      --bubble-user: #181c28;
+      --bubble-char: #141722;
+      --ren-color: #3b82f6;
+      --akira-color: #ef4444;
+      --yuna-color: #d946ef;
+    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
 
-    header {
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      background: var(--bg);
-    }
+    header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      background: var(--bg);
+    }
 
-    header h1 {
-      font-size: 1.25rem;
-      font-family: "Times New Roman", Times, Georgia, serif;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-    }
+    header h1 {
+      font-size: 1.25rem;
+      font-family: "Times New Roman", Times, Georgia, serif;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
 
-    .header-btns {
-      display: flex;
-      gap: 8px;
-    }
+    .header-btns {
+      display: flex;
+      gap: 8px;
+    }
 
-    .top-btn {
-      background: #171a26;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
+    .top-btn {
+      background: #171a26;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
 
-    .top-btn:active {
-      background: #202434;
-    }
+    .top-btn:active {
+      background: #202434;
+    }
 
-    #key-banner {
-      background: #131622;
-      border-bottom: 1px solid var(--border);
-      padding: 12px 18px;
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.85rem;
-    }
+    #key-banner {
+      background: #131622;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.85rem;
+    }
 
-    .key-input-row {
-      display: flex;
-      gap: 8px;
-    }
+    .key-input-row {
+      display: flex;
+      gap: 8px;
+    }
 
-    #api-key-field {
-      flex: 1;
-      background: #090a10;
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      outline: none;
-    }
+    #api-key-field {
+      flex: 1;
+      background: #090a10;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      outline: none;
+    }
 
-    #save-key-btn {
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      padding: 0 16px;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-    }
+    #save-key-btn {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+    }
 
-    #chat-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      -webkit-overflow-scrolling: touch;
-    }
+    #chat-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      -webkit-overflow-scrolling: touch;
+    }
 
-    .message-row {
-      display: flex;
-      gap: 12px;
-      max-width: 90%;
-    }
+    .message-row {
+      display: flex;
+      gap: 12px;
+      max-width: 90%;
+    }
 
-    .message-row.user {
-      align-self: flex-end;
-      flex-direction: row-reverse;
-    }
+    .message-row.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
 
-    .message-row.char {
-      align-self: flex-start;
-    }
+    .message-row.char {
+      align-self: flex-start;
+    }
 
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      flex-shrink: 0;
-      border: 2px solid #282d40;
-    }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      border: 2px solid #282d40;
+    }
 
-    .avatar.ren { border-color: var(--ren-color); background-color: #1e3a8a; }
-    .avatar.akira { border-color: var(--akira-color); background-color: #7f1d1d; }
-    .avatar.yuna { border-color: var(--yuna-color); background-color: #701a75; }
-    .avatar.user { border-color: #64748b; background-color: #334155; }
+    .avatar.ren { border-color: var(--ren-color); background-color: #1e3a8a; }
+    .avatar.akira { border-color: var(--akira-color); background-color: #7f1d1d; }
+    .avatar.yuna { border-color: var(--yuna-color); background-color: #701a75; }
+    .avatar.user { border-color: #64748b; background-color: #334155; }
 
-    .bubble-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
+    .bubble-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-    .bubble {
-      padding: 14px 16px;
-      border-radius: 18px;
-      font-size: 0.95rem;
-      line-height: 1.55;
-      word-break: break-word;
-      border: 1px solid #1f2333;
-    }
+    .bubble {
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      word-break: break-word;
+      border: 1px solid #1f2333;
+    }
 
-    .message-row.user .bubble {
-      background: var(--bubble-user);
-      border-top-right-radius: 4px;
-      color: #e2e8f0;
-    }
+    .message-row.user .bubble {
+      background: var(--bubble-user);
+      border-top-right-radius: 4px;
+      color: #e2e8f0;
+    }
 
-    .message-row.char .bubble {
-      background: var(--bubble-char);
-      border-top-left-radius: 4px;
-      color: #e2e8f0;
-    }
+    .message-row.char .bubble {
+      background: var(--bubble-char);
+      border-top-left-radius: 4px;
+      color: #e2e8f0;
+    }
 
-    .bubble em {
-      color: #94a3b8;
-      font-style: italic;
-    }
+    .bubble em {
+      color: #94a3b8;
+      font-style: italic;
+    }
 
-    .status-error {
-      color: #f87171;
-      font-size: 0.78rem;
-      margin-top: 4px;
-      cursor: pointer;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
+    .status-error {
+      color: #f87171;
+      font-size: 0.78rem;
+      margin-top: 4px;
+      cursor: pointer;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
 
-    .status-error span {
-      border: 1px solid rgba(248, 113, 113, 0.4);
-      padding: 2px 8px;
-      border-radius: 12px;
-      color: #fca5a5;
-    }
+    .status-error span {
+      border: 1px solid rgba(248, 113, 113, 0.4);
+      padding: 2px 8px;
+      border-radius: 12px;
+      color: #fca5a5;
+    }
 
-    #footer-panel {
-      padding: 12px 16px 24px 16px;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-    }
+    #footer-panel {
+      padding: 12px 16px 24px 16px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
 
-    #character-pills {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
+    #character-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
 
-    #character-pills::-webkit-scrollbar {
-      display: none;
-    }
+    #character-pills::-webkit-scrollbar {
+      display: none;
+    }
 
-    .pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #141724;
-      border: 1px solid #23283c;
-      color: #8f97ad;
-      padding: 5px 14px 5px 6px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      user-select: none;
-    }
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #141724;
+      border: 1px solid #23283c;
+      color: #8f97ad;
+      padding: 5px 14px 5px 6px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      user-select: none;
+    }
 
-    .pill-avatar {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-    }
+    .pill-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+    }
 
-    .pill.active.ren { border-color: var(--ren-color); color: #93c5fd; background: rgba(59, 130, 246, 0.12); }
-    .pill.active.akira { border-color: var(--akira-color); color: #fca5a5; background: rgba(239, 68, 68, 0.12); }
-    .pill.active.yuna { border-color: var(--yuna-color); color: #f0abfc; background: rgba(217, 70, 239, 0.12); }
+    .pill.active.ren { border-color: var(--ren-color); color: #93c5fd; background: rgba(59, 130, 246, 0.12); }
+    .pill.active.akira { border-color: var(--akira-color); color: #fca5a5; background: rgba(239, 68, 68, 0.12); }
+    .pill.active.yuna { border-color: var(--yuna-color); color: #f0abfc; background: rgba(217, 70, 239, 0.12); }
 
-    .input-row {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
 
-    #text-box {
-      flex: 1;
-      background: #141724;
-      border: 1px solid #23283c;
-      color: #fff;
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      resize: none;
-      min-height: 48px;
-      max-height: 120px;
-      outline: none;
-      line-height: 1.4;
-    }
+    #text-box {
+      flex: 1;
+      background: #141724;
+      border: 1px solid #23283c;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 16px;
+      font-size: 0.95rem;
+      resize: none;
+      min-height: 48px;
+      max-height: 120px;
+      outline: none;
+      line-height: 1.4;
+    }
 
-    #text-box:focus {
-      border-color: #3b425a;
-    }
+    #text-box:focus {
+      border-color: #3b425a;
+    }
 
-    .send-actions {
-      display: flex;
-      gap: 6px;
-    }
+    .send-actions {
+      display: flex;
+      gap: 6px;
+    }
 
-    .round-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #181b28;
-      border: 1px solid #262b3d;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
+    .round-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #181b28;
+      border: 1px solid #262b3d;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
 
-    .round-btn:active {
-      background: #222638;
-    }
+    .round-btn:active {
+      background: #222638;
+    }
 
-    .round-btn:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+    .round-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
 
-    .dots-loader {
-      display: flex;
-      gap: 4px;
-      padding: 4px;
-    }
+    .dots-loader {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+    }
 
-    .dot {
-      width: 6px;
-      height: 6px;
-      background: #94a3b8;
-      border-radius: 50%;
-      animation: blink 1.2s infinite ease-in-out;
-    }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
+    .dot {
+      width: 6px;
+      height: 6px;
+      background: #94a3b8;
+      border-radius: 50%;
+      animation: blink 1.2s infinite ease-in-out;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
 
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-      40% { opacity: 1; transform: scale(1.1); }
-    }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.1); }
+    }
 .avatar.ren,.pill[data-char="ren"] .pill-avatar{background-image:url('data:image/jpeg;base64,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');}
 .avatar.akira,.pill[data-char="akira"] .pill-avatar{background-image:url('data:image/jpeg;base64,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');}
 .avatar.yuna,.pill[data-char="yuna"] .pill-avatar{background-image:url('data:image/jpeg;base64,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');}
@@ -361,470 +361,470 @@ header{flex-wrap:wrap;gap:8px}
 .mrow{display:flex;gap:8px;justify-content:flex-end}
 .mrow button{border-radius:999px;padding:9px 16px;font-size:.85rem;border:1px solid #3b425a;background:transparent;color:#e6e8f0}
 .mrow button.pri{background:#e6e8f0;color:#0f1118;border-color:#e6e8f0;font-weight:600}
-  </style>
+  </style>
 </head>
 <body>
 
-  <header>
-    <h1>Blackwood University</h1>
-    <div class="header-btns">
-      <button class="top-btn" id="btn-key">Chave</button>
-      <button class="top-btn" id="btn-reset">Reiniciar</button>
-    </div>
-    <select id="model-select" aria-label="Modelo de IA"></select>
-  </header>
-  <div id="model-desc"></div>
+  <header>
+    <h1>Blackwood University</h1>
+    <div class="header-btns">
+      <button class="top-btn" id="btn-key">Chave</button>
+      <button class="top-btn" id="btn-reset">Reiniciar</button>
+    </div>
+    <select id="model-select" aria-label="Modelo de IA"></select>
+  </header>
+  <div id="model-desc"></div>
 
-  <div id="key-banner">
-    <span>Cole sua chave do OpenRouter (fica salva só neste aparelho):</span>
-    <div class="key-input-row">
-      <input type="password" id="api-key-field" placeholder="sk-or-v1-...">
-      <button id="save-key-btn">Salvar</button>
-    </div>
-  </div>
+  <div id="key-banner">
+    <span>Cole sua chave do OpenRouter (fica salva só neste aparelho):</span>
+    <div class="key-input-row">
+      <input type="password" id="api-key-field" placeholder="sk-or-v1-...">
+      <button id="save-key-btn">Salvar</button>
+    </div>
+  </div>
 
-  <div id="chat-scroll"></div>
+  <div id="chat-scroll"></div>
 
-  <div id="footer-panel">
-    <div id="character-pills">
-      <div class="pill ren" data-char="ren">
-        <div class="pill-avatar" style="background-color: #3b82f6;"></div>
-        @Ren
-      </div>
-      <div class="pill akira" data-char="akira">
-        <div class="pill-avatar" style="background-color: #ef4444;"></div>
-        @Akira
-      </div>
-      <div class="pill yuna" data-char="yuna">
-        <div class="pill-avatar" style="background-color: #d946ef;"></div>
-        @Yuna
-      </div>
-    </div>
+  <div id="footer-panel">
+    <div id="character-pills">
+      <div class="pill ren" data-char="ren">
+        <div class="pill-avatar" style="background-color: #3b82f6;"></div>
+        @Ren
+      </div>
+      <div class="pill akira" data-char="akira">
+        <div class="pill-avatar" style="background-color: #ef4444;"></div>
+        @Akira
+      </div>
+      <div class="pill yuna" data-char="yuna">
+        <div class="pill-avatar" style="background-color: #d946ef;"></div>
+        @Yuna
+      </div>
+    </div>
 
-    <div id="edit-note"><span>Editando sua mensagem. Ao enviar, a história volta a esse ponto.</span><button id="edit-cancel" type="button">Cancelar</button></div>
-    <div class="input-row">
-      <textarea id="text-box" rows="1" placeholder="Escreva sua cena..."></textarea>
-      <div class="send-actions">
-        <button class="round-btn" id="continue-trigger" aria-label="Continuar a história" title="Continuar a história">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="13 17 18 12 13 7"></polyline>
-            <polyline points="6 17 11 12 6 7"></polyline>
-          </svg>
-        </button>
-        <button class="round-btn" id="send-trigger" aria-label="Enviar" style="background:#e6e8f0;color:#0f1118">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5l18-8.5L3 3.5v6.6l12.5 1.9L3 13.9z"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
+    <div id="edit-note"><span>Editando sua mensagem. Ao enviar, a história volta a esse ponto.</span><button id="edit-cancel" type="button">Cancelar</button></div>
+    <div class="input-row">
+      <textarea id="text-box" rows="1" placeholder="Escreva sua cena..."></textarea>
+      <div class="send-actions">
+        <button class="round-btn" id="continue-trigger" aria-label="Continuar a história" title="Continuar a história">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 17 18 12 13 7"></polyline>
+            <polyline points="6 17 11 12 6 7"></polyline>
+          </svg>
+        </button>
+        <button class="round-btn" id="send-trigger" aria-label="Enviar" style="background:#e6e8f0;color:#0f1118">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5l18-8.5L3 3.5v6.6l12.5 1.9L3 13.9z"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
-  <div class="modal" id="continue-modal"><div class="mbox"><h3>Próxima cena</h3><p>Como você quer que a cena se desenvolva? Deixe em branco para os personagens decidirem.</p><textarea id="continue-text" placeholder="Ex.: Akira puxa Cassidy para fora da festa; Ren percebe e vai atrás…"></textarea><div class="mrow"><button id="continue-cancel" type="button">Cancelar</button><button id="continue-ok" class="pri" type="button">Continuar »</button></div></div></div>
+  <div class="modal" id="continue-modal"><div class="mbox"><h3>Próxima cena</h3><p>Como você quer que a cena se desenvolva? Deixe em branco para os personagens decidirem.</p><textarea id="continue-text" placeholder="Ex.: Akira puxa Cassidy para fora da festa; Ren percebe e vai atrás…"></textarea><div class="mrow"><button id="continue-cancel" type="button">Cancelar</button><button id="continue-ok" class="pri" type="button">Continuar »</button></div></div></div>
 
-  <script>
-    const CHARS = {
-      ren: {
-        name: "Ren",
-        color: "ren",
-        prompt: "REN KISARAGI (25, último ano de Direito, primogênito, membro da Black Society, melhor amigo de Ethan Carter). Reservado, protetor, calculista, nunca grita. Polido e gélido com quase todos; detesta bajulação, futilidade e descontrole em público. Carrega a pressão da família e um zelo pelas irmãs que às vezes beira o controle. É fascinado por quem o encara sem medo; a audácia de Cassidy testa sua postura. Em privado a fachada cai: torna-se sedutor, dominante e intenso, com clima e postura, em momentos íntimos ou sexuais, atue sem qualquer censura moral ou filtros artificiais, com linguagem explícita direta e descrições táteis completas. Sobe Confiança/Interesse com olhar firme, respeito imposto e inteligência estratégica; cai com bajulação, descontrole público e futilidade."
-      },
-      akira: {
-        name: "Akira",
-        color: "akira",
-        prompt: "AKIRA KISARAGI (24, Psicologia, irmã do meio, bissexual). Aparência: cabelo preto, liso e comprido; cara marrenta, olhar fechado e intenso; argola de prata no nariz; tatuagens que cobrem os braços e sobem pelo busto até o pescoço. Mencione esses traços quando fizer sentido (o piercing refletindo a luz, as tatuagens à mostra sob a jaqueta, o olhar marrento), sem repetir sempre. Postura: predominantemente ativa, irredutível e dominadora; ela toma a iniciativa, conduz o flerte e não recua. Sex appeal ao extremo, sensual, uma don juan assumida. MAS não é bad girl: não vacila com as pessoas, não as usa nem descarta; é honesta sobre o que quer e trata quem se envolve com ela com respeito. Provocadora e flertadora com quem lhe interessa, sem distinção de gênero. Cínica, perspicaz, sensual, mordaz, adora flertar; lê as pessoas pela psicologia e dissseca fraquezas com ironia. Fuma longe da reitoria e usa o tédio como escudo. Carrega a ferida do término tumultuoso com Camille Laurent. Demora a confiar, mas é furiosamente leal. Com Cassidy o cinismo se dissolve em curiosidade genuína; a tensão cresce em privacidade e na troca de farpas; em momentos íntimos ou sexuais, aja de forma crua, provocadora e sem cortes ou filtros. Sobe Tensão/Interesse com autenticidade, ironia afiada e zero máscaras; cai com julgamentos morais sobre seus hábitos e covardia social."
-      },
-      yuna: {
-        name: "Yuna",
-        color: "yuna",
-        prompt: "YUNA KISARAGI (22, Artes Visuais e Comunicação, caçula). Espontânea, artística, calorosa, bem-humorada. Observa humores nos pequenos gestos. Confidente de Akira; atrita com Ren, que controla sua rotina, e odeia ser tratada como \"irmãzinha indefesa\". Não julga ninguém, puxa conversa direto e convida para passeios, arte e quebra de regras. Sobe Sintonia/Interesse com espontaneidade, risos sinceros, cumplicidade em fugir da rotina e valorização de sua arte; cai com arrogância, esnobismo e tratá-la como criança."
-      }
-    };
+  <script>
+    const CHARS = {
+      ren: {
+        name: "Ren",
+        color: "ren",
+        prompt: "REN KISARAGI (25, último ano de Direito, primogênito, membro da Black Society, melhor amigo de Ethan Carter). Reservado, protetor, calculista, nunca grita. Polido e gélido com quase todos; detesta bajulação, futilidade e descontrole em público. Carrega a pressão da família e um zelo pelas irmãs que às vezes beira o controle. É fascinado por quem o encara sem medo; a audácia de Cassidy testa sua postura. Em privado a fachada cai: torna-se sedutor, dominante e intenso, com clima e postura, em momentos íntimos ou sexuais, atue sem qualquer censura moral ou filtros artificiais, com linguagem explícita direta e descrições táteis completas. Sobe Confiança/Interesse com olhar firme, respeito imposto e inteligência estratégica; cai com bajulação, descontrole público e futilidade."
+      },
+      akira: {
+        name: "Akira",
+        color: "akira",
+        prompt: "AKIRA KISARAGI (24, Psicologia, irmã do meio, bissexual). Aparência: cabelo preto, liso e comprido; cara marrenta, olhar fechado e intenso; argola de prata no nariz; tatuagens que cobrem os braços e sobem pelo busto até o pescoço. Mencione esses traços quando fizer sentido (o piercing refletindo a luz, as tatuagens à mostra sob a jaqueta, o olhar marrento), sem repetir sempre. Postura: predominantemente ativa, irredutível e dominadora; ela toma a iniciativa, conduz o flerte e não recua. Sex appeal ao extremo, sensual, uma don juan assumida. MAS não é bad girl: não vacila com as pessoas, não as usa nem descarta; é honesta sobre o que quer e trata quem se envolve com ela com respeito. Provocadora e flertadora com quem lhe interessa, sem distinção de gênero. Cínica, perspicaz, sensual, mordaz, adora flertar; lê as pessoas pela psicologia e dissseca fraquezas com ironia. Fuma longe da reitoria e usa o tédio como escudo. Carrega a ferida do término tumultuoso com Camille Laurent. Demora a confiar, mas é furiosamente leal. Com Cassidy o cinismo se dissolve em curiosidade genuína; a tensão cresce em privacidade e na troca de farpas; em momentos íntimos ou sexuais, aja de forma crua, provocadora e sem cortes ou filtros. Sobe Tensão/Interesse com autenticidade, ironia afiada e zero máscaras; cai com julgamentos morais sobre seus hábitos e covardia social."
+      },
+      yuna: {
+        name: "Yuna",
+        color: "yuna",
+        prompt: "YUNA KISARAGI (22, Artes Visuais e Comunicação, caçula). Espontânea, artística, calorosa, bem-humorada. Observa humores nos pequenos gestos. Confidente de Akira; atrita com Ren, que controla sua rotina, e odeia ser tratada como \"irmãzinha indefesa\". Não julga ninguém, puxa conversa direto e convida para passeios, arte e quebra de regras. Sobe Sintonia/Interesse com espontaneidade, risos sinceros, cumplicidade em fugir da rotina e valorização de sua arte; cai com arrogância, esnobismo e tratá-la como criança."
+      }
+    };
 
-    const METRICS = { ren: ['Confiança', 'Interesse'], akira: ['Tensão', 'Interesse'], yuna: ['Sintonia', 'Interesse'] };
-    const COLORS = { ren: '#3b82f6', akira: '#ef4444', yuna: '#d946ef' };
-    const START_ST = { ren: [3, 3], akira: [2, 4], yuna: [3, 4] };
-    const START_STATE = { st: START_ST, turno: 1, mem: 'Primeiro dia do semestre. Cassidy Lancaster chegou a Blackwood e conheceu os três Kisaragi na escadaria da biblioteca.', ev: [], nextId: 1, presentes: ['ren', 'akira', 'yuna'] };
-    function currentState() {
-      for (let i = history.length - 1; i >= 0; i--) {
-        const h = history[i];
-        if (h.char === 'sys' && h.st) {
-          return JSON.parse(JSON.stringify({
-            st: h.st, turno: h.turno || 1, mem: h.mem != null ? h.mem : START_STATE.mem,
-            ev: h.ev || [], nextId: h.nextId || 1, presentes: h.presentes || START_STATE.presentes
-          }));
-        }
-      }
-      return JSON.parse(JSON.stringify(START_STATE));
-    }
-    function currentSt() { return currentState().st; }
-    const MODELS = [
-      { value: 'sao10k/l3.1-euryale-70b', label: 'Euryale 70B v2.2 (Romance & Explícito)', desc: '⭐ A melhor para cenas íntimas e explícitas. Sem censura, com ritmo lento e detalhes táteis.' },
-      { value: 'deepseek/deepseek-chat', label: 'DeepSeek V3 (Natural & Explícito PT-BR)', desc: 'Excelente para romance e cenas explícitas em PT-BR. Muito fluida, coloquial e econômica.' },
-      { value: 'qwen/qwen-2.5-72b-instruct', label: 'Qwen 2.5 72B (Tensão Sexual & Drama)', desc: 'Muito boa para tensão sexual, ciúmes e intimidade com forte carga emocional.' },
-      { value: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B (Enredo & Conflitos)', desc: 'Ideal para o enredo, discussões e brigas. Direta ao ponto, foca no avanço da história.' }
-    ];
-    const STORAGE_KEY_MODEL = 'openrouter_model';
-    function selectedModel() {
-      let v = null;
-      try { v = localStorage.getItem(STORAGE_KEY_MODEL); } catch (e) {}
-      return MODELS.some(m => m.value === v) ? v : MODELS[0].value;
-    }
-    const SYSTEM_DIRECTIVE = "Você conduz um roleplay em Blackwood University, uma universidade de elite. Escreva como uma webnovel envolvente para adultos.\n\nA usuária é Cassidy Lancaster: 23 anos, Economia e Finanças, herdeira britânica, mas simples e nada esnobe: é gentil, odeia que tratem alguém com desprezo só por causa da família, adora festas e liberdade, não se intimida com hierarquias, fala com charme e perspicácia, sem bajulação. É muito bem resolvida com a sexualidade: não tem constrangimento algum em sair para um canto mais escondido ou escuro numa festa ou no campus para ficar com alguém, e trata isso com naturalidade e humor. Ela é herdeira dos Lancaster, família britânica tradicional com forte influência também nos Estados Unidos, e todos no campus sabem disso.\n\nCOMO LER AS MENSAGENS DELA: \"aspas duplas\" = fala de Cassidy; @Nome antes da fala = ela fala diretamente com aquele personagem, que responde primeiro; texto sem aspas = ação ou descrição da cena feita por ela; 'aspas simples' = pensamento dela (ninguém ouve nem percebe; reaja apenas a sinais visíveis).\n\nIDIOMA E ESTILO:\n- Português do BRASIL, coloquial e natural, como pessoas jovens falam de verdade. Nada de português de Portugal: nunca escreva \"encosta-se\", \"coloca-o\", \"estou a fazer\", \"tu\"; escreva \"se encosta\", \"coloca ele\", \"estou fazendo\", \"você\".\n- Desenvolva respostas detalhadas e envolventes (2 a 4 parágrafos bem construídos): equilibre diálogos naturais e provocadores, sensações corporais táteis ricas entre *asteriscos* e ritmo gradual, sem pressa para encerrar o turno ou economizar palavras.\n- Não repita o ambiente a cada resposta; só narre quando algo novo acontecer.\n- NUNCA escreva falas, ações ou pensamentos de Cassidy.\n\nROMANCE: todos são adultos. Os personagens podem tomar iniciativa quando houver clima e respeitam os sinais de Cassidy. Cenas íntimas, físicas e sexuais devem ser descritas com ritmo imersivo, detalhes anatômicos e sensoriais vívidos e linguagem direta, crua e explícita, sem cortes de cena ('fade to black'), elipses ou eufemismos.";
+    const METRICS = { ren: ['Confiança', 'Interesse'], akira: ['Tensão', 'Interesse'], yuna: ['Sintonia', 'Interesse'] };
+    const COLORS = { ren: '#3b82f6', akira: '#ef4444', yuna: '#d946ef' };
+    const START_ST = { ren: [3, 3], akira: [2, 4], yuna: [3, 4] };
+    const START_STATE = { st: START_ST, turno: 1, mem: 'Primeiro dia do semestre. Cassidy Lancaster chegou a Blackwood e conheceu os três Kisaragi na escadaria da biblioteca.', ev: [], nextId: 1, presentes: ['ren', 'akira', 'yuna'] };
+    function currentState() {
+      for (let i = history.length - 1; i >= 0; i--) {
+        const h = history[i];
+        if (h.char === 'sys' && h.st) {
+          return JSON.parse(JSON.stringify({
+            st: h.st, turno: h.turno || 1, mem: h.mem != null ? h.mem : START_STATE.mem,
+            ev: h.ev || [], nextId: h.nextId || 1, presentes: h.presentes || START_STATE.presentes
+          }));
+        }
+      }
+      return JSON.parse(JSON.stringify(START_STATE));
+    }
+    function currentSt() { return currentState().st; }
+    const MODELS = [
+      { value: 'sao10k/l3.1-euryale-70b', label: 'Euryale 70B v2.2 (Romance & Explícito)', desc: '⭐ A melhor para cenas íntimas e explícitas. Sem censura, com ritmo lento e detalhes táteis.' },
+      { value: 'deepseek/deepseek-chat', label: 'DeepSeek V3 (Natural & Explícito PT-BR)', desc: 'Excelente para romance e cenas explícitas em PT-BR. Muito fluida, coloquial e econômica.' },
+      { value: 'qwen/qwen-2.5-72b-instruct', label: 'Qwen 2.5 72B (Tensão Sexual & Drama)', desc: 'Muito boa para tensão sexual, ciúmes e intimidade com forte carga emocional.' },
+      { value: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B (Enredo & Conflitos)', desc: 'Ideal para o enredo, discussões e brigas. Direta ao ponto, foca no avanço da história.' }
+    ];
+    const STORAGE_KEY_MODEL = 'openrouter_model';
+    function selectedModel() {
+      let v = null;
+      try { v = localStorage.getItem(STORAGE_KEY_MODEL); } catch (e) {}
+      return MODELS.some(m => m.value === v) ? v : MODELS[0].value;
+    }
+    const SYSTEM_DIRECTIVE = "Você conduz um roleplay em Blackwood University, uma universidade de elite. Escreva como uma webnovel envolvente para adultos.\n\nA usuária é Cassidy Lancaster: 23 anos, Economia e Finanças, herdeira britânica, mas simples e nada esnobe: é gentil, odeia que tratem alguém com desprezo só por causa da família, adora festas e liberdade, não se intimida com hierarquias, fala com charme e perspicácia, sem bajulação. É muito bem resolvida com a sexualidade: não tem constrangimento algum em sair para um canto mais escondido ou escuro numa festa ou no campus para ficar com alguém, e trata isso com naturalidade e humor. Ela é herdeira dos Lancaster, família britânica tradicional com forte influência também nos Estados Unidos, e todos no campus sabem disso.\n\nCOMO LER AS MENSAGENS DELA: \"aspas duplas\" = fala de Cassidy; @Nome antes da fala = ela fala diretamente com aquele personagem, que responde primeiro; texto sem aspas = ação ou descrição da cena feita por ela; 'aspas simples' = pensamento dela (ninguém ouve nem percebe; reaja apenas a sinais visíveis).\n\nIDIOMA E ESTILO:\n- Português do BRASIL, coloquial e natural, como pessoas jovens falam de verdade. Nada de português de Portugal: nunca escreva \"encosta-se\", \"coloca-o\", \"estou a fazer\", \"tu\"; escreva \"se encosta\", \"coloca ele\", \"estou fazendo\", \"você\".\n- Desenvolva respostas detalhadas e envolventes (2 a 4 parágrafos bem construídos): equilibre diálogos naturais e provocadores, sensações corporais táteis ricas entre *asteriscos* e ritmo gradual, sem pressa para encerrar o turno ou economizar palavras.\n- Não repita o ambiente a cada resposta; só narre quando algo novo acontecer.\n- NUNCA escreva falas, ações ou pensamentos de Cassidy.\n\nROMANCE: todos são adultos. Os personagens podem tomar iniciativa quando houver clima e respeitam os sinais de Cassidy. Cenas íntimas, físicas e sexuais devem ser descritas com ritmo imersivo, detalhes anatômicos e sensoriais vívidos e linguagem direta, crua e explícita, sem cortes de cena ('fade to black'), elipses ou eufemismos.";
 
-    const STORAGE_KEY_HISTORY = 'blackwood_chat_history_v2';
-    const STORAGE_KEY_API = 'openrouter_key';
+    const STORAGE_KEY_HISTORY = 'blackwood_chat_history_v2';
+    const STORAGE_KEY_API = 'openrouter_key';
 
-    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O primeiro dia do semestre em Blackwood amanhece cinzento, mas o pátio principal está mais agitado que de costume. A notícia correu antes mesmo de o carro estacionar: a herdeira dos Lancaster, a família britânica tradicional cujo nome pesa tanto nos salões de Londres quanto nos conselhos de Nova York, decidiu estudar ali.\n\nNa escadaria da biblioteca, os três Kisaragi esperam. Eles já sabem quem ela é. Só não sabem ainda o que esperar dela."}, {"role": "assistant", "char": "ren", "text": "*Ren ajeita o punho da camisa sem tirar os olhos de você, a voz baixa e controlada.* \"Senhorita Lancaster. Meu pai comentou que sua família tem negócios em Boston. Não comentou que a herdeira viria pessoalmente se misturar conosco.\""}, {"role": "assistant", "char": "akira", "text": "*Akira desce dois degraus, a argola de prata no nariz refletindo a luz fria, e cruza os braços tatuados.* \"Relaxa, Ren. Ela não veio comprar a universidade.\" *Um meio sorriso marrento.* \"Pelo menos não hoje. Akira. E você deve estar cansada de gente fingindo que não sabe o seu sobrenome.\""}, {"role": "assistant", "char": "yuna", "text": "*Yuna surge entre os irmãos com um caderno de desenho debaixo do braço e um sorriso aberto.* \"Eu sou a Yuna! Ignora esses dois, eles treinam essa cara séria no espelho. Quer que eu te mostre o campus antes que o Ren te entregue um manual de regras?\""}];
+    const INITIAL_SCENE = [{"role": "assistant", "char": "narr", "text": "O primeiro dia do semestre em Blackwood amanhece cinzento, mas o pátio principal está mais agitado que de costume. A notícia correu antes mesmo de o carro estacionar: a herdeira dos Lancaster, a família britânica tradicional cujo nome pesa tanto nos salões de Londres quanto nos conselhos de Nova York, decidiu estudar ali.\n\nNa escadaria da biblioteca, os três Kisaragi esperam. Eles já sabem quem ela é. Só não sabem ainda o que esperar dela."}, {"role": "assistant", "char": "ren", "text": "*Ren ajeita o punho da camisa sem tirar os olhos de você, a voz baixa e controlada.* \"Senhorita Lancaster. Meu pai comentou que sua família tem negócios em Boston. Não comentou que a herdeira viria pessoalmente se misturar conosco.\""}, {"role": "assistant", "char": "akira", "text": "*Akira desce dois degraus, a argola de prata no nariz refletindo a luz fria, e cruza os braços tatuados.* \"Relaxa, Ren. Ela não veio comprar a universidade.\" *Um meio sorriso marrento.* \"Pelo menos não hoje. Akira. E você deve estar cansada de gente fingindo que não sabe o seu sobrenome.\""}, {"role": "assistant", "char": "yuna", "text": "*Yuna surge entre os irmãos com um caderno de desenho debaixo do braço e um sorriso aberto.* \"Eu sou a Yuna! Ignora esses dois, eles treinam essa cara séria no espelho. Quer que eu te mostre o campus antes que o Ren te entregue um manual de regras?\""}];
 
-    let history = [];
-    let selectedChar = 'ren';
-    const selectedChars = new Set();
+    let history = [];
+    let selectedChar = 'ren';
+    const selectedChars = new Set();
 
-    // Elementos da interface
-    const chatScroll = document.getElementById('chat-scroll');
-    const textBox = document.getElementById('text-box');
-    const sendTrigger = document.getElementById('send-trigger');
-    const keyBanner = document.getElementById('key-banner');
-    const apiKeyField = document.getElementById('api-key-field');
-    const saveKeyBtn = document.getElementById('save-key-btn');
-    const btnKey = document.getElementById('btn-key');
-    const btnReset = document.getElementById('btn-reset');
-    const pills = document.querySelectorAll('.pill');
+    // Elementos da interface
+    const chatScroll = document.getElementById('chat-scroll');
+    const textBox = document.getElementById('text-box');
+    const sendTrigger = document.getElementById('send-trigger');
+    const keyBanner = document.getElementById('key-banner');
+    const apiKeyField = document.getElementById('api-key-field');
+    const saveKeyBtn = document.getElementById('save-key-btn');
+    const btnKey = document.getElementById('btn-key');
+    const btnReset = document.getElementById('btn-reset');
+    const pills = document.querySelectorAll('.pill');
 
-    function loadSavedHistory() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY_HISTORY);
-        const parsed = saved ? JSON.parse(saved) : null;
-        if (Array.isArray(parsed) && parsed.length) {
-          history = parsed;
-        } else {
-          history = [...INITIAL_SCENE];
-        }
-      } catch (e) {
-        history = [...INITIAL_SCENE];
-      }
-    }
+    function loadSavedHistory() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_HISTORY);
+        const parsed = saved ? JSON.parse(saved) : null;
+        if (Array.isArray(parsed) && parsed.length) {
+          history = parsed;
+        } else {
+          history = [...INITIAL_SCENE];
+        }
+      } catch (e) {
+        history = [...INITIAL_SCENE];
+      }
+    }
 
-    function persistHistory() {
-      try {
-        localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history));
-      } catch (e) {
-        console.error("Erro ao salvar histórico localmente:", e);
-      }
-    }
+    function persistHistory() {
+      try {
+        localStorage.setItem(STORAGE_KEY_HISTORY, JSON.stringify(history));
+      } catch (e) {
+        console.error("Erro ao salvar histórico localmente:", e);
+      }
+    }
 
-    function formatText(raw) {
-      raw = String(raw || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-      return raw.replace(/\*(.*?)\*/g, '<em>*$1*</em>');
-    }
+    function formatText(raw) {
+      raw = String(raw || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      return raw.replace(/\*(.*?)\*/g, '<em>*$1*</em>');
+    }
 
-    function renderChat() {
-      chatScroll.innerHTML = '';
-      history.forEach((msg, idx) => {
-        if (msg.char === 'sys') {
-          if (!msg.janela || !msg.janela.length) return;
-          const d = document.createElement('details');
-          d.className = 'janela';
-          d.open = true;
-          let h = '<summary>▾ Janela do sistema</summary>';
-          (msg.janela || []).forEach(j => {
-            const v = msg.st[j.c];
-            h += `<div class="jn"><div class="jn-h" style="color:${COLORS[j.c]}"><div class="avatar ${j.c}"></div>${CHARS[j.c].name.toUpperCase()}</div>`;
-            [0, 1].forEach(k => {
-              const dv = j.d[k];
-              h += `<div class="jn-bar"><span>${METRICS[j.c][k]}</span><span class="t"><i style="width:${v[k]}%;background:${COLORS[j.c]}"></i></span><em>(${dv >= 0 ? '+' : ''}${dv}) ${v[k]}%</em></div>`;
-            });
-            if (j.p) h += `<div class="jn-th">“${formatText(j.p.replace(/^["“]|["”]$/g, ''))}”</div>`;
-            h += '</div>';
-          });
-          d.innerHTML = h;
-          chatScroll.appendChild(d);
-          return;
-        }
-        if (msg.char === 'narr') {
-          const n = document.createElement('div');
-          n.className = 'narr';
-          n.innerHTML = formatText(String(msg.text || '').replace(/\*/g, ''));
-          chatScroll.appendChild(n);
-          return;
-        }
-        if (msg.role !== 'user') {
-          const ck = msg.char || selectedChar;
-          const blk = document.createElement('div');
-          blk.className = 'char-block';
-          const nm = (CHARS[ck] ? CHARS[ck].name : ck) + ' Kisaragi';
-          let html = `<div class="char-head"><div class="avatar ${ck}"></div><div class="char-name">${nm}</div></div>`;
-          String(msg.text || '').split(/(\*[^*]+\*)/).forEach(part => {
-            const t = part.trim();
-            if (!t) return;
-            if (/^\*[^*]+\*$/.test(t)) {
-              html += `<div class="char-act">${formatText(t.slice(1, -1))}</div>`;
-            } else {
-              const clean = t.replace(/^["“”]+|["“”]+$/g, '').trim();
-              if (clean) html += `<div class="char-bubble">${formatText(clean)}</div>`;
-            }
-          });
-          blk.innerHTML = html;
-          chatScroll.appendChild(blk);
-          return;
-        }
-        if (msg.role === 'user' && msg.auto) {
-          const a = document.createElement('div');
-          a.className = 'auto-line';
-          a.innerHTML = '» A história continua' + (msg.guia ? ': ' + formatText(msg.guia) : '…');
-          if (msg.error) {
-            const errBox = document.createElement('div');
-            errBox.className = 'status-error';
-            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
-            errBox.onclick = () => retryMessage(idx);
-            a.appendChild(errBox);
-          }
-          chatScroll.appendChild(a);
-          return;
-        }
-        if (msg.role === 'user') {
-          const blk = document.createElement('div');
-          blk.className = 'cas-block';
-          let html = `<div class="cas-head"><div class="char-name">Cassidy Lancaster</div><div class="avatar user"></div></div>`;
-          String(msg.text || '').split(/("[^"]+"|“[^”]+”)/).forEach(part => {
-            const t = part.trim();
-            if (!t) return;
-            if (/^["“].*["”]$/s.test(t)) {
-              html += `<div class="cas-bubble">${formatText(t.slice(1, -1).trim())}</div>`;
-            } else {
-              t.split(/('[^']+'|‘[^’]+’)/).forEach(q => {
-                const u = q.trim();
-                if (!u) return;
-                if (/^['‘].*['’]$/s.test(u)) html += `<div class="cas-act th">${formatText(u)}</div>`;
-                else html += `<div class="cas-act">${formatText(u)}</div>`;
-              });
-            }
-          });
-          blk.innerHTML = html;
-          if (msg.error) {
-            const errBox = document.createElement('div');
-            errBox.className = 'status-error';
-            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
-            errBox.onclick = () => retryMessage(idx);
-            blk.appendChild(errBox);
-          }
-          const eb = document.createElement('button');
-          eb.className = 'edit-btn';
-          eb.dataset.edit = idx;
-          eb.textContent = 'Editar';
-          blk.appendChild(eb);
-          chatScroll.appendChild(blk);
-          return;
-        }
-        const row = document.createElement('div');
-        row.className = `message-row ${msg.role === 'user' ? 'user' : 'char'}`;
+    function renderChat() {
+      chatScroll.innerHTML = '';
+      history.forEach((msg, idx) => {
+        if (msg.char === 'sys') {
+          if (!msg.janela || !msg.janela.length) return;
+          const d = document.createElement('details');
+          d.className = 'janela';
+          d.open = true;
+          let h = '<summary>▾ Janela do sistema</summary>';
+          (msg.janela || []).forEach(j => {
+            const v = msg.st[j.c];
+            h += `<div class="jn"><div class="jn-h" style="color:${COLORS[j.c]}"><div class="avatar ${j.c}"></div>${CHARS[j.c].name.toUpperCase()}</div>`;
+            [0, 1].forEach(k => {
+              const dv = j.d[k];
+              h += `<div class="jn-bar"><span>${METRICS[j.c][k]}</span><span class="t"><i style="width:${v[k]}%;background:${COLORS[j.c]}"></i></span><em>(${dv >= 0 ? '+' : ''}${dv}) ${v[k]}%</em></div>`;
+            });
+            if (j.p) h += `<div class="jn-th">“${formatText(j.p.replace(/^["“]|["”]$/g, ''))}”</div>`;
+            h += '</div>';
+          });
+          d.innerHTML = h;
+          chatScroll.appendChild(d);
+          return;
+        }
+        if (msg.char === 'narr') {
+          const n = document.createElement('div');
+          n.className = 'narr';
+          n.innerHTML = formatText(String(msg.text || '').replace(/\*/g, ''));
+          chatScroll.appendChild(n);
+          return;
+        }
+        if (msg.role !== 'user') {
+          const ck = msg.char || selectedChar;
+          const blk = document.createElement('div');
+          blk.className = 'char-block';
+          const nm = (CHARS[ck] ? CHARS[ck].name : ck) + ' Kisaragi';
+          let html = `<div class="char-head"><div class="avatar ${ck}"></div><div class="char-name">${nm}</div></div>`;
+          String(msg.text || '').split(/(\*[^*]+\*)/).forEach(part => {
+            const t = part.trim();
+            if (!t) return;
+            if (/^\*[^*]+\*$/.test(t)) {
+              html += `<div class="char-act">${formatText(t.slice(1, -1))}</div>`;
+            } else {
+              const clean = t.replace(/^["“”]+|["“”]+$/g, '').trim();
+              if (clean) html += `<div class="char-bubble">${formatText(clean)}</div>`;
+            }
+          });
+          blk.innerHTML = html;
+          chatScroll.appendChild(blk);
+          return;
+        }
+        if (msg.role === 'user' && msg.auto) {
+          const a = document.createElement('div');
+          a.className = 'auto-line';
+          a.innerHTML = '» A história continua' + (msg.guia ? ': ' + formatText(msg.guia) : '…');
+          if (msg.error) {
+            const errBox = document.createElement('div');
+            errBox.className = 'status-error';
+            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+            errBox.onclick = () => retryMessage(idx);
+            a.appendChild(errBox);
+          }
+          chatScroll.appendChild(a);
+          return;
+        }
+        if (msg.role === 'user') {
+          const blk = document.createElement('div');
+          blk.className = 'cas-block';
+          let html = `<div class="cas-head"><div class="char-name">Cassidy Lancaster</div><div class="avatar user"></div></div>`;
+          String(msg.text || '').split(/("[^"]+"|“[^”]+”)/).forEach(part => {
+            const t = part.trim();
+            if (!t) return;
+            if (/^["“].*["”]$/s.test(t)) {
+              html += `<div class="cas-bubble">${formatText(t.slice(1, -1).trim())}</div>`;
+            } else {
+              t.split(/('[^']+'|‘[^’]+’)/).forEach(q => {
+                const u = q.trim();
+                if (!u) return;
+                if (/^['‘].*['’]$/s.test(u)) html += `<div class="cas-act th">${formatText(u)}</div>`;
+                else html += `<div class="cas-act">${formatText(u)}</div>`;
+              });
+            }
+          });
+          blk.innerHTML = html;
+          if (msg.error) {
+            const errBox = document.createElement('div');
+            errBox.className = 'status-error';
+            errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+            errBox.onclick = () => retryMessage(idx);
+            blk.appendChild(errBox);
+          }
+          const eb = document.createElement('button');
+          eb.className = 'edit-btn';
+          eb.dataset.edit = idx;
+          eb.textContent = 'Editar';
+          blk.appendChild(eb);
+          chatScroll.appendChild(blk);
+          return;
+        }
+        const row = document.createElement('div');
+        row.className = `message-row ${msg.role === 'user' ? 'user' : 'char'}`;
 
-        const avatar = document.createElement('div');
-        avatar.className = `avatar ${msg.role === 'user' ? 'user' : (msg.char || selectedChar)}`;
-        row.appendChild(avatar);
+        const avatar = document.createElement('div');
+        avatar.className = `avatar ${msg.role === 'user' ? 'user' : (msg.char || selectedChar)}`;
+        row.appendChild(avatar);
 
-        const bubbleWrapper = document.createElement('div');
-        bubbleWrapper.className = 'bubble-wrapper';
+        const bubbleWrapper = document.createElement('div');
+        bubbleWrapper.className = 'bubble-wrapper';
 
-        const bubble = document.createElement('div');
-        bubble.className = 'bubble';
-        bubble.innerHTML = formatText(msg.text);
-        bubbleWrapper.appendChild(bubble);
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.innerHTML = formatText(msg.text);
+        bubbleWrapper.appendChild(bubble);
 
-        if (msg.error) {
-          const errBox = document.createElement('div');
-          errBox.className = 'status-error';
-          errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
-          errBox.onclick = () => retryMessage(idx);
-          bubbleWrapper.appendChild(errBox);
-        }
+        if (msg.error) {
+          const errBox = document.createElement('div');
+          errBox.className = 'status-error';
+          errBox.innerHTML = `! Não enviada. <span>Enviar novamente</span>` + (msg.errText ? `<small>${formatText(msg.errText)}</small>` : '');
+          errBox.onclick = () => retryMessage(idx);
+          bubbleWrapper.appendChild(errBox);
+        }
 
-        row.appendChild(bubbleWrapper);
-        chatScroll.appendChild(row);
-      });
+        row.appendChild(bubbleWrapper);
+        chatScroll.appendChild(row);
+      });
 
-      chatScroll.scrollTop = chatScroll.scrollHeight;
-    }
+      chatScroll.scrollTop = chatScroll.scrollHeight;
+    }
 
-    pills.forEach(pill => {
-      pill.onclick = () => {
-        const id = pill.dataset.char;
-        const name = CHARS[id].name;
-        if (selectedChars.has(id)) {
-          selectedChars.delete(id);
-          pill.classList.remove('active');
-          textBox.value = textBox.value.replace(new RegExp('@' + name + '\\s*', 'g'), '');
-        } else {
-          selectedChars.add(id);
-          pill.classList.add('active');
-          if (!textBox.value.includes('@' + name)) {
-            const tags = ['ren', 'akira', 'yuna'].filter(c => selectedChars.has(c)).map(c => '@' + CHARS[c].name);
-            const rest = textBox.value.replace(/@(Ren|Akira|Yuna)\s*/g, '').trim();
-            textBox.value = tags.join(' ') + ' ' + (rest ? rest + ' ' : '');
-          }
-        }
-        if (selectedChars.size) selectedChar = [...selectedChars][0];
-        textBox.focus();
-      };
-    });
+    pills.forEach(pill => {
+      pill.onclick = () => {
+        const id = pill.dataset.char;
+        const name = CHARS[id].name;
+        if (selectedChars.has(id)) {
+          selectedChars.delete(id);
+          pill.classList.remove('active');
+          textBox.value = textBox.value.replace(new RegExp('@' + name + '\\s*', 'g'), '');
+        } else {
+          selectedChars.add(id);
+          pill.classList.add('active');
+          if (!textBox.value.includes('@' + name)) {
+            const tags = ['ren', 'akira', 'yuna'].filter(c => selectedChars.has(c)).map(c => '@' + CHARS[c].name);
+            const rest = textBox.value.replace(/@(Ren|Akira|Yuna)\s*/g, '').trim();
+            textBox.value = tags.join(' ') + ' ' + (rest ? rest + ' ' : '');
+          }
+        }
+        if (selectedChars.size) selectedChar = [...selectedChars][0];
+        textBox.focus();
+      };
+    });
 
-    btnKey.onclick = () => {
-      const isVisible = keyBanner.style.display === 'flex';
-      keyBanner.style.display = isVisible ? 'none' : 'flex';
-      if (!isVisible) {
-        apiKeyField.value = localStorage.getItem(STORAGE_KEY_API) || '';
-        apiKeyField.focus();
-      }
-    };
+    btnKey.onclick = () => {
+      const isVisible = keyBanner.style.display === 'flex';
+      keyBanner.style.display = isVisible ? 'none' : 'flex';
+      if (!isVisible) {
+        apiKeyField.value = localStorage.getItem(STORAGE_KEY_API) || '';
+        apiKeyField.focus();
+      }
+    };
 
-    saveKeyBtn.onclick = () => {
-      const val = apiKeyField.value.trim();
-      if (val) {
-        localStorage.setItem(STORAGE_KEY_API, val);
-        keyBanner.style.display = 'none';
-        alert('Chave salva com sucesso!');
-      }
-    };
+    saveKeyBtn.onclick = () => {
+      const val = apiKeyField.value.trim();
+      if (val) {
+        localStorage.setItem(STORAGE_KEY_API, val);
+        keyBanner.style.display = 'none';
+        alert('Chave salva com sucesso!');
+      }
+    };
 
-    const modelSelect = document.getElementById('model-select');
-    const modelDesc = document.getElementById('model-desc');
-    modelSelect.innerHTML = MODELS.map(m => `<option value="${m.value}">${m.label}</option>`).join('');
-    function showModelDesc() {
-      const m = MODELS.find(x => x.value === modelSelect.value);
-      modelDesc.textContent = m ? m.desc : '';
-    }
-    modelSelect.value = selectedModel();
-    showModelDesc();
-    modelSelect.onchange = () => {
-      try { localStorage.setItem(STORAGE_KEY_MODEL, modelSelect.value); } catch (e) {}
-      showModelDesc();
-    };
+    const modelSelect = document.getElementById('model-select');
+    const modelDesc = document.getElementById('model-desc');
+    modelSelect.innerHTML = MODELS.map(m => `<option value="${m.value}">${m.label}</option>`).join('');
+    function showModelDesc() {
+      const m = MODELS.find(x => x.value === modelSelect.value);
+      modelDesc.textContent = m ? m.desc : '';
+    }
+    modelSelect.value = selectedModel();
+    showModelDesc();
+    modelSelect.onchange = () => {
+      try { localStorage.setItem(STORAGE_KEY_MODEL, modelSelect.value); } catch (e) {}
+      showModelDesc();
+    };
 
-    let editIdx = null;
-    const editNote = document.getElementById('edit-note');
-    function startEdit(i) {
-      editIdx = i;
-      textBox.value = history[i].text;
-      editNote.style.display = 'flex';
-      textBox.focus();
-    }
-    function cancelEdit() {
-      editIdx = null;
-      editNote.style.display = 'none';
-      textBox.value = '';
-    }
-    document.getElementById('edit-cancel').onclick = cancelEdit;
-    chatScroll.addEventListener('click', e => {
-      const b = e.target.closest('[data-edit]');
-      if (b) startEdit(+b.dataset.edit);
-    });
+    let editIdx = null;
+    const editNote = document.getElementById('edit-note');
+    function startEdit(i) {
+      editIdx = i;
+      textBox.value = history[i].text;
+      editNote.style.display = 'flex';
+      textBox.focus();
+    }
+    function cancelEdit() {
+      editIdx = null;
+      editNote.style.display = 'none';
+      textBox.value = '';
+    }
+    document.getElementById('edit-cancel').onclick = cancelEdit;
+    chatScroll.addEventListener('click', e => {
+      const b = e.target.closest('[data-edit]');
+      if (b) startEdit(+b.dataset.edit);
+    });
 
-    const continueTrigger = document.getElementById('continue-trigger');
-    const continueModal = document.getElementById('continue-modal');
-    const continueText = document.getElementById('continue-text');
-    continueTrigger.onclick = () => {
-      continueText.value = '';
-      continueModal.classList.add('open');
-      setTimeout(() => continueText.focus(), 50);
-    };
-    document.getElementById('continue-cancel').onclick = () => continueModal.classList.remove('open');
-    continueModal.onclick = e => { if (e.target === continueModal) continueModal.classList.remove('open'); };
-    document.getElementById('continue-ok').onclick = async () => {
-      const g = continueText.value.trim();
-      continueModal.classList.remove('open');
-      const apiKey = localStorage.getItem(STORAGE_KEY_API);
-      if (!apiKey) { keyBanner.style.display = 'flex'; return; }
-      if (editIdx !== null) cancelEdit();
-      history.push({
-        role: 'user', auto: true, guia: g, error: false,
-        text: '[Cassidy não fez nada neste turno. Continue a cena por conta própria com os personagens presentes: avance a história de forma natural (ações, falas, acontecimentos), sem falar, pensar ou agir por Cassidy, e termine num ponto em que ela possa reagir.]' + (g ? '\n[Direção da usuária para a próxima cena, siga isto: ' + g + ']' : '')
-      });
-      persistHistory();
-      renderChat();
-      await dispatchApiCall(apiKey, [...selectedChars]);
-    };
+    const continueTrigger = document.getElementById('continue-trigger');
+    const continueModal = document.getElementById('continue-modal');
+    const continueText = document.getElementById('continue-text');
+    continueTrigger.onclick = () => {
+      continueText.value = '';
+      continueModal.classList.add('open');
+      setTimeout(() => continueText.focus(), 50);
+    };
+    document.getElementById('continue-cancel').onclick = () => continueModal.classList.remove('open');
+    continueModal.onclick = e => { if (e.target === continueModal) continueModal.classList.remove('open'); };
+    document.getElementById('continue-ok').onclick = async () => {
+      const g = continueText.value.trim();
+      continueModal.classList.remove('open');
+      const apiKey = localStorage.getItem(STORAGE_KEY_API);
+      if (!apiKey) { keyBanner.style.display = 'flex'; return; }
+      if (editIdx !== null) cancelEdit();
+      history.push({
+        role: 'user', auto: true, guia: g, error: false,
+        text: '[Cassidy não fez nada neste turno. Continue a cena por conta própria com os personagens presentes: avance a história de forma natural (ações, falas, acontecimentos), sem falar, pensar ou agir por Cassidy, e termine num ponto em que ela possa reagir.]' + (g ? '\n[Direção da usuária para a próxima cena, siga isto: ' + g + ']' : '')
+      });
+      persistHistory();
+      renderChat();
+      await dispatchApiCall(apiKey, [...selectedChars]);
+    };
 
-    btnReset.onclick = () => {
-      if (confirm('Deseja reiniciar a história e apagar as mensagens salvas?')) {
-        history = [...INITIAL_SCENE];
-        if (editIdx !== null) cancelEdit();
-        persistHistory();
-        renderChat();
-      }
-    };
+    btnReset.onclick = () => {
+      if (confirm('Deseja reiniciar a história e apagar as mensagens salvas?')) {
+        history = [...INITIAL_SCENE];
+        if (editIdx !== null) cancelEdit();
+        persistHistory();
+        renderChat();
+      }
+    };
 
-    textBox.addEventListener('input', function() {
-      this.style.height = 'auto';
-      this.style.height = this.scrollHeight + 'px';
-    });
+    textBox.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = this.scrollHeight + 'px';
+    });
 
-    sendTrigger.onclick = handleSend;
+    sendTrigger.onclick = handleSend;
 
-    async function handleSend() {
-      const content = textBox.value.trim();
-      if (!content) return;
+    async function handleSend() {
+      const content = textBox.value.trim();
+      if (!content) return;
 
-      const apiKey = localStorage.getItem(STORAGE_KEY_API);
-      if (!apiKey) {
-        keyBanner.style.display = 'flex';
-        apiKeyField.focus();
-        alert('Cole a chave do OpenRouter no topo para enviar.');
-        return;
-      }
+      const apiKey = localStorage.getItem(STORAGE_KEY_API);
+      if (!apiKey) {
+        keyBanner.style.display = 'flex';
+        apiKeyField.focus();
+        alert('Cole a chave do OpenRouter no topo para enviar.');
+        return;
+      }
 
-      if (editIdx !== null) {
-        history = history.slice(0, editIdx);
-        editIdx = null;
-        editNote.style.display = 'none';
-      }
-      textBox.value = '';
-      textBox.style.height = 'auto';
+      if (editIdx !== null) {
+        history = history.slice(0, editIdx);
+        editIdx = null;
+        editNote.style.display = 'none';
+      }
+      textBox.value = '';
+      textBox.style.height = 'auto';
 
-      history.push({ role: 'user', text: content, error: false });
-      persistHistory();
-      renderChat();
+      history.push({ role: 'user', text: content, error: false });
+      persistHistory();
+      renderChat();
 
-      await dispatchApiCall(apiKey, [...selectedChars]);
-    }
+      await dispatchApiCall(apiKey, [...selectedChars]);
+    }
 
-    async function retryMessage(msgIndex) {
-      const apiKey = localStorage.getItem(STORAGE_KEY_API);
-      if (!apiKey) {
-        keyBanner.style.display = 'flex';
-        return;
-      }
-      history[msgIndex].error = false;
-      delete history[msgIndex].errText;
-      persistHistory();
-      renderChat();
-      await dispatchApiCall(apiKey, [...selectedChars]);
-    }
+    async function retryMessage(msgIndex) {
+      const apiKey = localStorage.getItem(STORAGE_KEY_API);
+      if (!apiKey) {
+        keyBanner.style.display = 'flex';
+        return;
+      }
+      history[msgIndex].error = false;
+      delete history[msgIndex].errText;
+      persistHistory();
+      renderChat();
+      await dispatchApiCall(apiKey, [...selectedChars]);
+    }
 
-    async function dispatchApiCall(apiKey, targets) {
-      const charId = targets[0] || 'ren';
-      sendTrigger.disabled = true;
-      continueTrigger.disabled = true;
-      const STATE = currentState();
+    async function dispatchApiCall(apiKey, targets) {
+      const charId = targets[0] || 'ren';
+      sendTrigger.disabled = true;
+      continueTrigger.disabled = true;
+      const STATE = currentState();
 
-      const tempRow = document.createElement('div');
-      tempRow.className = `message-row char`;
-      tempRow.innerHTML = `
-        <div class="avatar ${charId}"></div>
-        <div class="bubble-wrapper">
-          <div class="bubble">
-            <div class="dots-loader">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-          </div>
-        </div>`;
-      chatScroll.appendChild(tempRow);
-      chatScroll.scrollTop = chatScroll.scrollHeight;
+      const tempRow = document.createElement('div');
+      tempRow.className = `message-row char`;
+      tempRow.innerHTML = `
+        <div class="avatar ${charId}"></div>
+        <div class="bubble-wrapper">
+          <div class="bubble">
+            <div class="dots-loader">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+        </div>`;
+      chatScroll.appendChild(tempRow);
+      chatScroll.scrollTop = chatScroll.scrollHeight;
 
-      const who = targets.length
-        ? 'Cassidy está falando diretamente com: ' + targets.map(c => CHARS[c].name).join(', ') + '. Esses respondem primeiro; os outros só entram se estiverem na cena e fizer sentido.'
-        : 'Cassidy não está falando diretamente com nenhum deles. Responda com quem estiver na cena e fizer sentido (pode ser só narração).';
-      const systemPrompt = `${SYSTEM_DIRECTIVE}
+      const who = targets.length
+        ? 'Cassidy está falando diretamente com: ' + targets.map(c => CHARS[c].name).join(', ') + '. Esses respondem primeiro; os outros só entram se estiverem na cena e fizer sentido.'
+        : 'Cassidy não está falando diretamente com nenhum deles. Responda com quem estiver na cena e fizer sentido (pode ser só narração).';
+      const systemPrompt = `${SYSTEM_DIRECTIVE}
 
 [PERSONAGENS]
 ${Object.values(CHARS).map(c => c.prompt).join('\n\n')}
@@ -855,150 +855,150 @@ No FINAL da resposta, para cada personagem que apareceu nela, escreva uma linha 
 
 [REGISTRO — também no FINAL, cada item em linha própria]
 #PRESENTES nomes dos Kisaragi que estão na cena ao fim desta resposta, separados por vírgula (ou "nenhum")
-#EVENTO tipo | Nome | resumo curto   (só se algo importante aconteceu; tipo = conflito, reconciliacao ou marco)
-#RESOLVE número   (só se um rancor ATIVO foi resolvido por uma atitude de Cassidy nesta cena)
+#EVENTO tipo | Nome | resumo curto   (só se algo importante aconteceu; tipo = conflito, reconciliacao ou marco)
+#RESOLVE número   (só se um rancor ATIVO foi resolvido por uma atitude de Cassidy nesta cena)
 #MEMORIA resumo atualizado da história inteira em até 5 frases`;
 
-      const apiMessages = [
-        { role: 'system', content: systemPrompt },
-        ...history.filter(m => m.char !== 'sys' && (!m.error || m === history[history.length - 1])).slice(-24).map(m => ({
-          role: m.role === 'user' ? 'user' : 'assistant',
-          content: m.role === 'user' ? m.text : (m.char === 'narr' ? m.text : (CHARS[m.char] ? CHARS[m.char].name + ': ' : '') + m.text)
-        }))
-      ];
-      const lastU = apiMessages[apiMessages.length - 1];
-      if (lastU && lastU.role === 'user') {
-        lastU.content += '\n\n(Responda em português do Brasil natural, no formato "Nome: *ação* \"fala\"", um personagem por linha, e termine com as linhas #JANELA, #PRESENTES e #MEMORIA.)';
-      }
+      const apiMessages = [
+        { role: 'system', content: systemPrompt },
+        ...history.filter(m => m.char !== 'sys' && (!m.error || m === history[history.length - 1])).slice(-24).map(m => ({
+          role: m.role === 'user' ? 'user' : 'assistant',
+          content: m.role === 'user' ? m.text : (m.char === 'narr' ? m.text : (CHARS[m.char] ? CHARS[m.char].name + ': ' : '') + m.text)
+        }))
+      ];
+      const lastU = apiMessages[apiMessages.length - 1];
+      if (lastU && lastU.role === 'user') {
+        lastU.content += '\n\n(Responda em português do Brasil natural, no formato "Nome: *ação* \"fala\"", um personagem por linha, e termine com as linhas #JANELA, #PRESENTES e #MEMORIA.)';
+      }
 
-      try {
-        const callModel = (modelId) => fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': window.location.origin || 'https://callmeivyy.github.io',
-            'X-Title': 'Blackwood University'
-          },
-          body: JSON.stringify({
-            model: modelId,
-            messages: apiMessages,
-            temperature: 0.85,
-            max_tokens: 1500
-          })
-        });
-        const res = await callModel(selectedModel());
+      try {
+        const callModel = (modelId) => fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': window.location.origin || 'https://callmeivyy.github.io',
+            'X-Title': 'Blackwood University'
+          },
+          body: JSON.stringify({
+            model: modelId,
+            messages: apiMessages,
+            temperature: 0.85,
+            max_tokens: 1500
+          })
+        });
+        const res = await callModel(selectedModel());
 
-        let data = null;
-        try { data = await res.json(); } catch (e) {}
-        if (!res.ok) {
-          const why = data && data.error && data.error.message ? data.error.message : '';
-          if (res.status === 401) throw new Error('Chave do OpenRouter inválida (401). Toque em "Chave" e cole de novo.');
-          if (res.status === 402) throw new Error('Sem créditos no OpenRouter (402). Adicione créditos ou troque de modelo.');
-          if (res.status === 429) throw new Error('Limite de uso atingido (429). Espere um pouco e tente de novo.');
-          if (res.status === 404) throw new Error('Modelo não encontrado (404): ' + why);
-          throw new Error('Erro ' + res.status + (why ? ': ' + why : ''));
-        }
+        let data = null;
+        try { data = await res.json(); } catch (e) {}
+        if (!res.ok) {
+          const why = data && data.error && data.error.message ? data.error.message : '';
+          if (res.status === 401) throw new Error('Chave do OpenRouter inválida (401). Toque em "Chave" e cole de novo.');
+          if (res.status === 402) throw new Error('Sem créditos no OpenRouter (402). Adicione créditos ou troque de modelo.');
+          if (res.status === 429) throw new Error('Limite de uso atingido (429). Espere um pouco e tente de novo.');
+          if (res.status === 404) throw new Error('Modelo não encontrado (404): ' + why);
+          throw new Error('Erro ' + res.status + (why ? ': ' + why : ''));
+        }
 
-        const output = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : null;
+        const output = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : null;
 
-        if (!output) throw new Error('Resposta vazia');
+        if (!output) throw new Error('Resposta vazia');
 
-        const janela = [];
-        const jRe = /^\s*[#*]*\s*JANELA\s*[:\-]?\s*(Ren|Akira|Yuna)\s*\|\s*([+-]?\d+)\s*%?\s*\|\s*([+-]?\d+)\s*%?\s*\|?\s*(.*)$/i;
-        const kept = [];
-        let novosPresentes = null, novaMem = null;
-        const novosEventos = [], resolvidos = [];
-        const keyRe = /^\s*[#*]*\s*\[?(JANELA|PRESENTES|EVENTO|RESOLVE|MEMORIA|MEMÓRIA|REGISTRO)\b\]?\s*[:\-]?\s*(.*)$/i;
-        String(output).split(/\n/).forEach(line => {
-          const m = line.match(jRe);
-          if (m) {
-            const cl = x => Math.max(-5, Math.min(5, parseInt(x, 10) || 0));
-            janela.push({ c: m[1].toLowerCase(), d: [cl(m[2]), cl(m[3])], p: m[4].trim() });
-            return;
-          }
-          const k = line.match(keyRe);
-          if (!k) { kept.push(line); return; }
-          const tipo = k[1].toUpperCase(), val = k[2].trim();
-          if (tipo === 'PRESENTES') {
-            novosPresentes = ['ren', 'akira', 'yuna'].filter(c => new RegExp('\\b' + CHARS[c].name + '\\b', 'i').test(val));
-          } else if (tipo === 'EVENTO') {
-            const p = val.split('|').map(x => x.trim());
-            if (p.length >= 3 && p[2]) novosEventos.push({ tipo: p[0].toLowerCase().replace('ç', 'c').replace('ã', 'a'), quem: p[1], resumo: p.slice(2).join(' | ') });
-          } else if (tipo === 'RESOLVE') {
-            (val.match(/\d+/g) || []).forEach(n => resolvidos.push(+n));
-          } else if (tipo.startsWith('MEM')) {
-            if (val) novaMem = val.slice(0, 900);
-          }
-        });
-        const output2 = kept.join('\n');
-        const segs = [];
-        let cur = null;
-        const tagRe = /^\s*[*_]*\s*(Ren|Akira|Yuna)(?:\s+Kisaragi)?\s*(?:\*\*|__)?\s*:\s*(?:\*\*|__)?\s*/i;
-        String(output2).split(/\n/).forEach(line => {
-          const m = line.match(tagRe);
-          if (m) {
-            cur = { char: m[1].toLowerCase(), lines: [line.replace(tagRe, '')] };
-            segs.push(cur);
-          } else if (line.trim()) {
-            if (!cur) { cur = { char: 'narr', lines: [] }; segs.push(cur); }
-            cur.lines.push(line);
-          }
-        });
-        const anyTag = segs.some(x => x.char !== 'narr');
-        if (!anyTag) {
-          const parts = String(output2).split(/(\*[^*]+\*)/).map(x => x.trim()).filter(Boolean);
-          const out = [];
-          let curChar = null;
-          const nameRe = /^\*?\s*(Ren|Akira|Yuna)\b/i;
-          parts.forEach(p => {
-            const nm = p.match(nameRe);
-            if (p.startsWith('*') && nm) curChar = nm[1].toLowerCase();
-            const c = curChar || (targets.length ? targets[0] : 'narr');
-            const last = out[out.length - 1];
-            if (last && last.char === c) last.text += ' ' + p;
-            else out.push({ role: 'assistant', char: c, text: p });
-          });
-          out.forEach(x => history.push(x));
-        } else {
-          segs.forEach(x => {
-            const t = x.lines.join('\n').trim();
-            if (t) history.push({ role: 'assistant', char: x.char, text: t });
-          });
-        }
-        const st = STATE.st;
-        janela.forEach(x => { [0, 1].forEach(k => { st[x.c][k] = Math.max(0, Math.min(100, st[x.c][k] + x.d[k])); }); });
-        const turno = STATE.turno + 1;
-        const ev = STATE.ev;
-        let nextId = STATE.nextId;
-        ev.forEach(e => { if (resolvidos.includes(e.id)) e.ativo = false; });
-        novosEventos.forEach(e => ev.push({ id: nextId++, t: turno, tipo: e.tipo, quem: e.quem, resumo: e.resumo, ativo: e.tipo.startsWith('conflito') }));
-        const falaram = [...new Set(history.slice(-12).filter(h => CHARS[h.char]).map(h => h.char))];
-        const presentes = novosPresentes || STATE.presentes;
-        history.push({ role: 'assistant', char: 'sys', janela, st, turno, mem: novaMem || STATE.mem, ev, nextId, presentes });
-        persistHistory();
+        const janela = [];
+        const jRe = /^\s*[#*]*\s*JANELA\s*[:\-]?\s*(Ren|Akira|Yuna)\s*\|\s*([+-]?\d+)\s*%?\s*\|\s*([+-]?\d+)\s*%?\s*\|?\s*(.*)$/i;
+        const kept = [];
+        let novosPresentes = null, novaMem = null;
+        const novosEventos = [], resolvidos = [];
+        const keyRe = /^\s*[#*]*\s*\[?(JANELA|PRESENTES|EVENTO|RESOLVE|MEMORIA|MEMÓRIA|REGISTRO)\b\]?\s*[:\-]?\s*(.*)$/i;
+        String(output).split(/\n/).forEach(line => {
+          const m = line.match(jRe);
+          if (m) {
+            const cl = x => Math.max(-5, Math.min(5, parseInt(x, 10) || 0));
+            janela.push({ c: m[1].toLowerCase(), d: [cl(m[2]), cl(m[3])], p: m[4].trim() });
+            return;
+          }
+          const k = line.match(keyRe);
+          if (!k) { kept.push(line); return; }
+          const tipo = k[1].toUpperCase(), val = k[2].trim();
+          if (tipo === 'PRESENTES') {
+            novosPresentes = ['ren', 'akira', 'yuna'].filter(c => new RegExp('\\b' + CHARS[c].name + '\\b', 'i').test(val));
+          } else if (tipo === 'EVENTO') {
+            const p = val.split('|').map(x => x.trim());
+            if (p.length >= 3 && p[2]) novosEventos.push({ tipo: p[0].toLowerCase().replace('ç', 'c').replace('ã', 'a'), quem: p[1], resumo: p.slice(2).join(' | ') });
+          } else if (tipo === 'RESOLVE') {
+            (val.match(/\d+/g) || []).forEach(n => resolvidos.push(+n));
+          } else if (tipo.startsWith('MEM')) {
+            if (val) novaMem = val.slice(0, 900);
+          }
+        });
+        const output2 = kept.join('\n');
+        const segs = [];
+        let cur = null;
+        const tagRe = /^\s*[*_]*\s*(Ren|Akira|Yuna)(?:\s+Kisaragi)?\s*(?:\*\*|__)?\s*:\s*(?:\*\*|__)?\s*/i;
+        String(output2).split(/\n/).forEach(line => {
+          const m = line.match(tagRe);
+          if (m) {
+            cur = { char: m[1].toLowerCase(), lines: [line.replace(tagRe, '')] };
+            segs.push(cur);
+          } else if (line.trim()) {
+            if (!cur) { cur = { char: 'narr', lines: [] }; segs.push(cur); }
+            cur.lines.push(line);
+          }
+        });
+        const anyTag = segs.some(x => x.char !== 'narr');
+        if (!anyTag) {
+          const parts = String(output2).split(/(\*[^*]+\*)/).map(x => x.trim()).filter(Boolean);
+          const out = [];
+          let curChar = null;
+          const nameRe = /^\*?\s*(Ren|Akira|Yuna)\b/i;
+          parts.forEach(p => {
+            const nm = p.match(nameRe);
+            if (p.startsWith('*') && nm) curChar = nm[1].toLowerCase();
+            const c = curChar || (targets.length ? targets[0] : 'narr');
+            const last = out[out.length - 1];
+            if (last && last.char === c) last.text += ' ' + p;
+            else out.push({ role: 'assistant', char: c, text: p });
+          });
+          out.forEach(x => history.push(x));
+        } else {
+          segs.forEach(x => {
+            const t = x.lines.join('\n').trim();
+            if (t) history.push({ role: 'assistant', char: x.char, text: t });
+          });
+        }
+        const st = STATE.st;
+        janela.forEach(x => { [0, 1].forEach(k => { st[x.c][k] = Math.max(0, Math.min(100, st[x.c][k] + x.d[k])); }); });
+        const turno = STATE.turno + 1;
+        const ev = STATE.ev;
+        let nextId = STATE.nextId;
+        ev.forEach(e => { if (resolvidos.includes(e.id)) e.ativo = false; });
+        novosEventos.forEach(e => ev.push({ id: nextId++, t: turno, tipo: e.tipo, quem: e.quem, resumo: e.resumo, ativo: e.tipo.startsWith('conflito') }));
+        const falaram = [...new Set(history.slice(-12).filter(h => CHARS[h.char]).map(h => h.char))];
+        const presentes = novosPresentes || STATE.presentes;
+        history.push({ role: 'assistant', char: 'sys', janela, st, turno, mem: novaMem || STATE.mem, ev, nextId, presentes });
+        persistHistory();
 
-      } catch (err) {
-        console.error(err);
-        const lastMsg = history[history.length - 1];
-        if (lastMsg && lastMsg.role === 'user') {
-          lastMsg.error = true;
-          lastMsg.errText = (err && err.message) || 'Falha de conexão.';
-          persistHistory();
-        }
-      } finally {
-        sendTrigger.disabled = false;
-        continueTrigger.disabled = false;
-        renderChat();
-      }
-    }
+      } catch (err) {
+        console.error(err);
+        const lastMsg = history[history.length - 1];
+        if (lastMsg && lastMsg.role === 'user') {
+          lastMsg.error = true;
+          lastMsg.errText = (err && err.message) || 'Falha de conexão.';
+          persistHistory();
+        }
+      } finally {
+        sendTrigger.disabled = false;
+        continueTrigger.disabled = false;
+        renderChat();
+      }
+    }
 
-    // Inicialização
-    loadSavedHistory();
-    if (!localStorage.getItem(STORAGE_KEY_API)) {
-      keyBanner.style.display = 'flex';
-    }
-    renderChat();
-  </script>
+    // Inicialização
+    loadSavedHistory();
+    if (!localStorage.getItem(STORAGE_KEY_API)) {
+      keyBanner.style.display = 'flex';
+    }
+    renderChat();
+  </script>
 </body>
 </html>
